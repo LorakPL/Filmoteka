@@ -1,0 +1,32 @@
+.select {
+    width: 100%;
+    position: relative;
+    height: 3em;
+    line-height: 3;
+    background: #1565C0;
+    overflow: hidden;
+    border-radius: .25em;
+    display: inline-block;
+    border: 1px solid #667780;
+    margin: 1em 0;
+}
+
+select {
+    width: 50%;
+    height: 100%;
+    margin: 0;
+    padding: 0 0 0 .5em;
+    color: #FFFFFF;
+    font-family: Verdana;
+    cursor: pointer;
+}
+
+.select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: #34495e;
+    pointer-events: none;
+}
