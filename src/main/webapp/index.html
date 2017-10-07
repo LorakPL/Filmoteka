@@ -1,151 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 
 <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Business Casual - Start Bootstrap Theme</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom fonts for this template -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
-
-    <!-- Custom styles for this template -->
-    <link href="css/business-casual.css" rel="stylesheet">
-    <link href="css/radio-buttons-index.css" rel="stylesheet">
-    <link href="css/select-dropdown-index.css" rel="stylesheet">
-    <link href="css/bigger-picture-index.css" rel="stylesheet">
-    <link href="css/search-box-index.css" rel="stylesheet">
-    <link href="css/table-index.css" rel="stylesheet">
-
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/index.css" />
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="js/index.js"></script>
+    <title>Filmoteka</title>
 </head>
 
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-faded py-lg-4">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav mx-auto">
-                <li class="nav-item active px-lg-4">
-                    <a class="nav-link text-uppercase text-expanded font-weight-bold" href="index.html">Dodaj film<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item px-lg-4">
-                    <a class="nav-link text-uppercase text-expanded font-weight-bold" href="about.html">Wszystkie</a>
-                </li>
-                <li class="nav-item px-lg-4">
-                    <a class="nav-link text-uppercase text-expanded font-weight-bold" href="blog.html">Polskie</a>
-                </li>
-                <li class="nav-item px-lg-4">
-                    <a class="nav-link text-uppercase text-expanded font-weight-bold" href="contact.html">Zagraniczne</a>
-                </li>
-                <li class="nav-item px-lg-4">
-                    <a class="nav-link text-uppercase text-expanded font-weight-bold" href="contact.html">Szukaj</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+<div class="topnav" id="myTopnav">
+    <a href="#home">Dodaj film</a>
+    <a href="#news">Filmy</a>
+    <a href="#contact">Seriale</a>
+    <a href="#about">Szukaj</a>
+    <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="navBarFunction()">&#9776;</a>
+</div>
 
-    <div class="container">
+<div id="wrapper">
+    <div class="content2">
+        <input type="text" placeholder="Szukaj" id="searchBox" autocomplete="off">
+    </div>
+    <div class="content2" id="galleryDiv">
+    </div>
+    <div class="content">
+        <button id="myBtn">Open Modal</button>
+    </div>
 
-        <div class="bg-faded p-4 my-4">
-            <input type="text" placeholder="Szukaj" id="searchBox" autocomplete="off">
-        </div>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
 
-        <div class="bg-faded p-4 my-4">
-            <hr class="divider">
-            <h2 class="text-center text-lg text-uppercase font-weight-bold my-0">Dodawanie filmów</h2>
-            <hr class="divider">
-            <br>
-            <form action="IndexServlet" method="post">
-                <div class="row">
-                    <div class="form-group col-lg-3">
-                        <label class="text-expanded font-weight-bold">Tytuł filmu</label>
-                        <input autocomplete="off" type="text" class="form-control" name="Title" id="Title">
-                    </div>
-                    <div class="form-group col-lg-3">
-                        <label class="text-expanded font-weight-bold">Rok produkcji</label>
-                        <input type="text" class="form-control" name="productionYear" id="productionYear">
-                    </div>
-                    <div class="form-group col-lg-3">
-                        <div class="radio-button-index">
-                            <div class="radio-button-index-polish">
-                                <input type="radio" name="radio" id="radio1" />
-                                <label for="radio1">Polski</label>
-                            </div>
-                            <div class="radio-button-index-foreign">
-                                <input type="radio" name="radio" id="radio2" checked/>
-                                <label for="radio2">Zagraniczny</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group col-lg-3">
-                        <select class="select" name="genre" id="genre">
-                            <option> Architecture </option>
-                            <option value="x86">x86</option>
-                            <option value="x64">x64</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-lg-12">
-                        <button type="button" class="btn btn-secondary" id="showTable">Szukaj</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div class="bg-faded p-4 my-4">
-            <div id="tablediv">
-                <table cellspacing="0" id="movieTable">
-                    <thead>
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Tytuł oryginalny</th>
-                            <th scope="col">Tytył polski</th>
-                            <th scope="col">Zdjęcie</th>
-                            <th scope="col">Kraj produkcji</th>
-                            <th scope="col">Gatunek</th>
-                            <th scope="col">Czas trwania</th>
-                            <th scope="col">Rok produkcji</th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-            <!--
-            <div id="thumbwrap">
-                <a class="thumb" href="#"><img src="http://1.fwcdn.pl/po/25/73/712573/7756329.4.jpg" alt=""><span><img src="http://1.fwcdn.pl/po/25/73/712573/7756329.6.jpg" alt=""></span></a>
-            </div>
-
-            -->
-
-            <!--
-            <hr class="divider">
-            <h2 class="text-center text-lg text-uppercase my-0">Build a website <strong>worth visitng</strong></h2>
-            <hr class="divider">
-            <img class="img-fluid float-left mr-4 d-none d-lg-block" src="img/intro-pic.jpg" alt="">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam soluta dolore voluptatem, deleniti dignissimos excepturi veritatis cum hic sunt perferendis ipsum perspiciatis nam officiis sequi atque enim ut! Velit, consectetur.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam pariatur perspiciatis reprehenderit illo et vitae iste provident debitis quos corporis saepe deserunt ad, officia, minima natus molestias assumenda nisi velit?</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit totam libero expedita magni est delectus pariatur aut, aperiam eveniet velit cum possimus, autem voluptas. Eum qui ut quasi voluptate blanditiis?</p>
-            -->
+        <!-- Modal content -->
+        <div class="modal-content" id="modalDiv">
+            <span class="close">&times;</span>
         </div>
 
     </div>
-    <!-- /.container -->
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/popper/popper.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
+</div>
 </body>
-
+<script src="js/index.js"></script>
 </html>
