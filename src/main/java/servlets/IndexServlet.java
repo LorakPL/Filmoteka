@@ -2,6 +2,7 @@ package servlets;
 
 import classes.Gallery;
 import classes.Movie;
+import classes.Series;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -9,7 +10,6 @@ import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import info.talacha.filmweb.api.FilmwebApi;
 import info.talacha.filmweb.models.Film;
-import info.talacha.filmweb.models.Series;
 import info.talacha.filmweb.search.models.FilmSearchResult;
 
 import javax.servlet.ServletException;
@@ -36,54 +36,22 @@ public class IndexServlet extends HttpServlet {
         List<FilmSearchResult> filmList = filmwebApi.findFilm(title[0]);
         List<FilmSearchResult> seriesList = filmwebApi.findSeries(title[0]);
 
-        ArrayList<Gallery> movies = new ArrayList<Gallery>();
-        ArrayList<Gallery> series = new ArrayList<Gallery>();
         ArrayList<Gallery> moviesGallery = new ArrayList<Gallery>();
         ArrayList<Gallery> seriesGallery = new ArrayList<Gallery>();
         ArrayList<Gallery> gallery = new ArrayList<Gallery>(); // Lista elementow, ktore zostana wyswietlone w postaci galerii
-        ArrayList<Gallery> moviesAndSeries = new ArrayList<Gallery>(); // Lista elementow, ktore zostana przeslane do AddToDatabase
-        String bigPicture;
 
-        // ----------- Pobieram liste filmow, ktore pasuja do wpisanego tytulu -----------
         for(FilmSearchResult movie : filmList){
-            bigPicture = movie.getImageURL();
-            String[] bigPictureParts = bigPicture.split("[.]");
-            bigPictureParts[bigPictureParts.length - 2] = "6";
-            bigPicture = bigPictureParts[0];
-
-            for(int i = 0; i < bigPictureParts.length-1; i++){
-                bigPicture +=  "." + bigPictureParts[i+1];
-            }
-
-            movies.add(new Gallery(movie.getId(), movie.getCast(), movie.getTitle(), movie.getPolishTitle(), movie.getYear(), bigPicture, movie.getImageURL(), "Film"));
-            moviesGallery.add(new Gallery(movie.getId(), bigPicture));
+            moviesGallery.add(new Gallery(movie.getId(), changeImageSize(movie.getImageURL(), "6"), movie.getPolishTitle(), "Film"));
         }
 
-        // ----------- Pobieram liste seriali, ktore pasuja do wpisanego tytulu -----------
         for(FilmSearchResult TVseries : seriesList){
-            bigPicture = TVseries.getImageURL();
-            String[] bigPictureParts = bigPicture.split("[.]");
-            bigPictureParts[bigPictureParts.length - 2] = "6";
-            bigPicture = bigPictureParts[0];
-
-            for(int i = 0; i < bigPictureParts.length-1; i++){
-                bigPicture +=  "." + bigPictureParts[i+1];
-            }
-
-            series.add(new Gallery(TVseries.getId(), TVseries.getCast(), TVseries.getTitle(), TVseries.getPolishTitle(), TVseries.getYear(), bigPicture, TVseries.getImageURL(), "Serial"));
-            seriesGallery.add(new Gallery(TVseries.getId(), bigPicture));
+            seriesGallery.add(new Gallery(TVseries.getId(), changeImageSize(TVseries.getImageURL(), "6"), TVseries.getPolishTitle(), "Serial"));
         }
-
-        // ----------- Lacze uzyskane listy w 2, gallery zostanie zwrocone jako galeria okladek, natomiast moviesAndSeries zostana przeslane do AddToDatabase -----------
 
         gallery.addAll(moviesGallery);
         gallery.addAll(seriesGallery);
 
-        moviesAndSeries.addAll(movies);
-        moviesAndSeries.addAll(series);
-
-        String arrayID = "moviesAndSeries";
-        request.getSession().setAttribute(arrayID, moviesAndSeries);
+        request.getSession().setAttribute("gallery", gallery); // "gallery" - id po ktorym bede szukal w sesji
 
         Gson gson = new Gson();
         JsonElement element = gson.toJsonTree(gallery, new TypeToken<List<Gallery>>() {}.getType());
@@ -91,8 +59,100 @@ public class IndexServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().print(jsonArray);
+
+        /*
+
+
+        FilmwebApi filmwebApi = new FilmwebApi();
+        String[] title = request.getParameterValues("json[]");
+
+        List<FilmSearchResult> filmList = filmwebApi.findFilm(title[0]);
+        List<FilmSearchResult> seriesList = filmwebApi.findSeries(title[0]);
+
+        ArrayList<Gallery> moviesGallery = new ArrayList<Gallery>();
+        ArrayList<Gallery> seriesGallery = new ArrayList<Gallery>();
+        ArrayList<Gallery> gallery = new ArrayList<Gallery>(); // Lista elementow, ktore zostana wyswietlone w postaci galerii
+        Film movieInfo = new Film();
+        info.talacha.filmweb.models.Series seriesInfo = new info.talacha.filmweb.models.Series();
+        List<String> descriptionList = null;
+        ArrayList<Movie> movies = new ArrayList<Movie>();
+        ArrayList<classes.Series> series = new ArrayList<classes.Series>();
+
+
+        // ----------- Pobieram liste filmow, ktore pasuja do wpisanego tytulu -----------
+        for(FilmSearchResult movie : filmList){
+            try{
+                movieInfo = filmwebApi.getFilmData(movie.getId());
+                descriptionList = filmwebApi.getDescriptions(movie.getId());
+            }
+            catch (Exception e){ }
+
+            movies.add(new Movie(1, movie.getId(), movie.getTitle(), movie.getPolishTitle(),
+                        changeImageSize(movie.getImageURL(), "0"), changeImageSize(movie.getImageURL(), "1"),
+                        changeImageSize(movie.getImageURL(), "2"), changeImageSize(movie.getImageURL(), "3"),
+                        changeImageSize(movie.getImageURL(), "4"), changeImageSize(movie.getImageURL(), "5"),
+                        changeImageSize(movie.getImageURL(), "6"), movie.getYear(), movie.getCast(), movieInfo.getDuration(),
+                        movieInfo.getCountries(), movieInfo.getGenre(), descriptionList, movieInfo.getPlot()));
+
+            moviesGallery.add(new Gallery(movie.getId(), changeImageSize(movie.getImageURL(), "6")));
+        }
+
+        // ----------- Pobieram liste seriali, ktore pasuja do wpisanego tytulu -----------
+        for(FilmSearchResult TVseries : seriesList){
+            try{
+                seriesInfo = filmwebApi.getSeriesData(TVseries.getId());
+                descriptionList = filmwebApi.getDescriptions(TVseries.getId());
+            }
+            catch (Exception e){ }
+
+            series.add(new classes.Series(1, TVseries.getId(), TVseries.getTitle(), TVseries.getPolishTitle(),
+                    changeImageSize(TVseries.getImageURL(), "0"), changeImageSize(TVseries.getImageURL(), "1"),
+                    changeImageSize(TVseries.getImageURL(), "2"), changeImageSize(TVseries.getImageURL(), "3"),
+                    changeImageSize(TVseries.getImageURL(), "4"), changeImageSize(TVseries.getImageURL(), "5"),
+                    changeImageSize(TVseries.getImageURL(), "6"), TVseries.getYear(), TVseries.getCast(),
+                    seriesInfo.getDuration(), seriesInfo.getCountries(), seriesInfo.getGenre(), descriptionList, seriesInfo.getPlot(),
+                    seriesInfo.getEpisodesCount(), seriesInfo.getSeasonsCount()));
+
+            seriesGallery.add(new Gallery(TVseries.getId(), changeImageSize(TVseries.getImageURL(), "6")));
+        }
+
+        // ----------- Lacze uzyskane listy w 2, gallery zostanie zwrocone jako galeria okladek, natomiast moviesAndSeries zostana przeslane do AddToDatabase -----------
+
+        gallery.addAll(moviesGallery);
+        gallery.addAll(seriesGallery);
+
+        request.getSession().setAttribute("movies", movies); // "movies" - id po ktorym bede szukal w sesji
+        request.getSession().setAttribute("series", series);
+
+        Gson gson = new Gson();
+        JsonElement element = gson.toJsonTree(gallery, new TypeToken<List<Gallery>>() {}.getType());
+        JsonArray jsonArray = element.getAsJsonArray();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().print(jsonArray);
+
+
+
+
+        */
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    }
+
+    private String changeImageSize(String url, String imageSize){
+        String image;
+        String[] imageParts;
+
+        imageParts = url.split("[.]");
+        imageParts[imageParts.length - 2] = imageSize;
+        image = imageParts[0];
+
+        for(int i = 0; i < imageParts.length - 1; i++){
+            image += "." + imageParts[i + 1];
+        }
+
+        return image;
     }
 }

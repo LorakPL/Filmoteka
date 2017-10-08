@@ -2,7 +2,34 @@ package classes;
 
 import java.util.List;
 
-public class Movie {
+public class Series {
+    /*-------- API --------
+    ID
+    Angielski tytuł
+    Polski tytuł
+    Zdjecie 0-6
+    Rok produkcji
+    Obsada
+
+
+
+    Liczba sezonow
+    Liczba odcinkow
+    Czas trwania
+    Kraje produkcji
+
+    Gatunek
+    Krótki opis
+    */
+
+    /*-------- Informacje od Ojca --------
+
+    Gatunek ???????
+    Regał/Rząd
+    Kraj produkcji ????????
+
+    */
+
     private int id; //ogarnac jak to jest zrobione w IDF, bo tu ma byc autoIncrement
     private Long filmwebId;
     private String originalTitle;
@@ -26,11 +53,14 @@ public class Movie {
     private int column;
     private int row;
     private String countryType; //Polish or foreign
+    private int numberOfEpisodes;
+    private int numberOfSeasons;
 
-    public Movie (int id, Long filmwebId, String originalTitle, String polishTitle,
-                  String image_0, String image_1, String image_2, String image_3,
-                  String image_4, String image_5, String image_6, int year, String cast, int duration,
-                  String productionCountry, String filmwebGenre, List<String> descriptionList, String plot){
+    public Series (int id, Long filmwebId, String originalTitle, String polishTitle,
+                   String image_0, String image_1, String image_2, String image_3,
+                   String image_4, String image_5, String image_6, int year, String cast,
+                   int duration, String productionCountry, String filmwebGenre, List<String> descriptionList,
+                   String plot, int numberOfEpisodes, int numberOfSeasons){
         this.setId(id);
         this.setFilmwebId(filmwebId);
         this.setOriginalTitle(originalTitle);
@@ -49,13 +79,16 @@ public class Movie {
         this.setFilmwebGenre(filmwebGenre);
         this.setDescriptionList(descriptionList);
         this.setPlot(plot);
+        this.setNumberOfEpisodes(numberOfEpisodes);
+        this.setNumberOfSeasons(numberOfSeasons);
     }
 
-    public Movie (int id, Long filmwebId, String originalTitle, String polishTitle,
+    public Series (int id, Long filmwebId, String originalTitle, String polishTitle,
                   String image_0, String image_1, String image_2, String image_3,
                   String image_4, String image_5, String image_6, int year, String cast,
                   int duration, String productionCountry, String filmwebGenre, List<String> descriptionList,
-                  String plot, String genre, int column, int row, String countryType){
+                  String plot, String genre, int column, int row, String countryType,
+                   int numberOfEpisodes, int numberOfSeasons){
         this.setId(id);
         this.setFilmwebId(filmwebId);
         this.setOriginalTitle(originalTitle);
@@ -73,37 +106,15 @@ public class Movie {
         this.setPlot(plot);
         this.setProductionCountry(productionCountry);
         this.setFilmwebGenre(filmwebGenre);
-        this.setDescriptionList(descriptionList);
         //this.setDescription(description);
+        this.setDescriptionList(descriptionList);
         this.setGenre(genre);
         this.setColumn(column);
         this.setRow(row);
         this.setCountryType(countryType);
+        this.setNumberOfEpisodes(numberOfEpisodes);
+        this.setNumberOfSeasons(numberOfSeasons);
     }
-
-
-    /*-------- API --------
-    ID
-    Angielski tytuł
-    Polski tytuł
-    Zdjecie 0-6
-    Rok produkcji
-    Obsada
-
-
-    Czas trwania
-    Kraje produkcji
-    Gatunek
-    Krótki opis
-    */
-
-    /*-------- Informacje od Ojca --------
-
-    Gatunek ???????
-    Regał/Rząd
-    Kraj produkcji ????????
-
-    */
 
     public void setId(int id){
         this.id = id;
@@ -237,7 +248,7 @@ public class Movie {
         this.descriptionList = descriptionList;
     }
 
-    public List<String> getDescriptionList() {
+    public List<String> getDescriptionList(){
         return descriptionList;
     }
 
@@ -289,5 +300,21 @@ public class Movie {
 
     public String getCountryType(){
         return countryType;
+    }
+
+    public void setNumberOfEpisodes(int numberOfEpisodes) {
+        this.numberOfEpisodes = numberOfEpisodes;
+    }
+
+    public int getNumberOfEpisodes() {
+        return numberOfEpisodes;
+    }
+
+    public void setNumberOfSeasons(int numberOfSeasons) {
+        this.numberOfSeasons = numberOfSeasons;
+    }
+
+    public int getNumberOfSeasons() {
+        return numberOfSeasons;
     }
 }

@@ -1,24 +1,28 @@
 package classes;
 
 public class Gallery {
-    private Long id;
-    private String cast;
-    private String title;
+    private Long filmwebId;
+    //private String cast;
+    //private String title;
     private String polishTitle;
-    private int year;
-    private String bigPicture;
-    private String smallPicture;
+    //private int year;
+    //private String bigPicture;
+    //private String smallPicture;
+    private String image_6;
     private String type;
 
-    public Gallery(){};
+    //public Gallery(){};
 
-    public  Gallery(Long id, String smallPicture){
-        this.id = id;
-        this.smallPicture = smallPicture;
+    public  Gallery(Long id, String image_6, String polishTitle, String type){
+        this.setFilmwebId(id);
+        this.setImage_6(image_6);
+        this.setPolishTitle(polishTitle);
+        this.setType(type);
     }
 
-    public Gallery(Long id, String cast, String title, String polishTitle, int year, String bigPicture, String smallPicture, String type){
-        this.id = id;
+    /*
+    public Gallery(Long filmwebId, String cast, String title, String polishTitle, int year, String bigPicture, String smallPicture, String type){
+        this.filmwebId = filmwebId;
         this.cast = cast;
         this.title = title;
         this.polishTitle = polishTitle;
@@ -27,14 +31,17 @@ public class Gallery {
         this.smallPicture = smallPicture;
         this.type = type;
     }
+    */
 
-    public void setId(Long id){
-        this.id = id;
+    public void setFilmwebId(Long filmwebId){
+        this.filmwebId = filmwebId;
     }
 
-    public Long getId(){
-        return id;
+    public Long getFilmwebId(){
+        return filmwebId;
     }
+
+    /*
 
     public void setCast(String cast) {
         this.cast = cast;
@@ -51,6 +58,7 @@ public class Gallery {
     public String getTitle() {
         return title;
     }
+    */
 
     public void setPolishTitle(String polishTitle) {
         this.polishTitle = polishTitle;
@@ -59,6 +67,8 @@ public class Gallery {
     public String getPolishTitle() {
         return polishTitle;
     }
+
+    /*
 
     public void setYear(int year) {
         this.year = year;
@@ -82,6 +92,16 @@ public class Gallery {
 
     public String getSmallPicture() {
         return smallPicture;
+    }
+
+    */
+
+    public void setImage_6(String image_6) {
+        this.image_6 = image_6;
+    }
+
+    public String getImage_6() {
+        return image_6;
     }
 
     public void setType(String type) {

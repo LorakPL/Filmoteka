@@ -23,12 +23,13 @@ $(document).ready(function() {
             var galery = $("#galleryDiv");
             var clearfix = $("<div class=\"clearfix\"></div>\n");
             $.each(responseJson, function(key,value) {
-                var id = value['id'];
-                var picture = value['smallPicture'];
+                var id = value['filmwebId'];
+                var picture = value['image_6'];
+                var polishTitle = value['polishTitle'];
                 var rowNew2 = $("<div class=\"responsive\">" +
                                     "<div class=\"gallery\">" +
                                         "<a target=\"_blank\">" +
-                                            "<img id=\"" + String(id) + "\" src=\"" + String(picture) + "\" alt=\"" + String(id) + "\" onclick=\"addMovie(" + String(id) + ")\">" +
+                                            "<img id=\"" + String(id) + "\" src=\"" + String(picture) + "\" alt=\"" + String(polishTitle) + "\" onclick=\"addMovie(" + String(id) + ")\">" +
                                         "</a>" +
                                     "</div>" +
                                 "</div>");
@@ -81,23 +82,24 @@ function addMovie(id) {
         }
         var modal = $("#modalDiv");
         $.each(responseJson, function(key,value) {
-            var id = value['id'];
+            var id = value['filmwebId'];
             var cast = value['cast'];
-            var title = value['title'];
             var polishTitle = value['polishTitle'];
             var year = value['year'];
-            var bigPicture = value['bigPicture'];
-            var smallPicture = value['smallPicture'];
+            var image_6 = value['image_6'];
             var type = value['type'];
-
+            var duration = value['duration'];
+            var descriptionList = value['descriptionList'];
+            var plot = value['plot'];
 
 
             var pictureRow = $("<div class=\"responsive\">" +
                                     "<div class=\"gallery\">" +
                                         "<a target=\"_blank\">" +
-                                            "<img src=\"" + String(bigPicture) + "\" width=\"600\" height=\"600\" alt=\"" + String(polishTitle) + "\">" +
+                                            "<img src=\"" + String(image_6) + "\" width=\"600\" height=\"600\" alt=\"" + String(polishTitle) + "\">" +
                                         "</a>" +
-                                        "<div class=\"desc\">" + String(polishTitle) + "</div>" +
+                                        "<div class=\"desc\">" + String(polishTitle) +
+                                        "</div>" +
                                     "</div>" +
                                 "</div>");
 
@@ -112,6 +114,18 @@ function addMovie(id) {
                                     "<tr>" +
                                         "<td><b>Rok:</b></td>" +
                                         "<td>" + String(year) + "</td>" +
+                                    "</tr>" +
+                                    "<tr>" +
+                                        "<td><b>Czas trwania:</b></td>" +
+                                        "<td>" + String(duration) + "</td>" +
+                                    "</tr>" +
+                                    "<tr>" +
+                                        "<td><b>Obsada:</b></td>" +
+                                        "<td>" + String(cast) + "</td>" +
+                                    "</tr>" +
+                                    "<tr>" +
+                                        "<td><b>Opis:</b></td>" +
+                                        "<td>" + String(plot) + "</td>" +
                                     "</tr>" +
                                 "</table>" +
                             "</div>");
