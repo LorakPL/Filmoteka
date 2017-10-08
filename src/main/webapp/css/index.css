@@ -93,25 +93,25 @@ a {color: #354458;}
 }
 
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color: rgba(17, 17, 17, 0.3);
+    color: rgba(17, 17, 17, 0.4);
     font-size: 20px;
 }
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color: rgba(17, 17, 17, 0.3);
+    color: rgba(17, 17, 17, 0.4);
     opacity:  1;
     font-size: 20px;
 }
 ::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color: rgba(17, 17, 17, 0.3);
+    color: rgba(17, 17, 17, 0.4);
     opacity:  1;
     font-size: 20px;
 }
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: rgba(17, 17, 17, 0.3);
+    color: rgba(17, 17, 17, 0.4);
     font-size: 20px;
 }
 :-ms-input-placeholder { /* Microsoft Edge */
-    color: rgba(17, 17, 17, 0.3);
+    color: rgba(17, 17, 17, 0.4);
     font-size: 20px;
 }
 

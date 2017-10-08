@@ -1,6 +1,7 @@
 package servlets;
 
 import classes.Gallery;
+import classes.Methods;
 import classes.Modal;
 import classes.Movie;
 import com.google.gson.Gson;
@@ -44,8 +45,9 @@ public class PrepareModal extends HttpServlet {
                     } catch (Exception e) {
                     }
 
-                    modal.add(new Modal(id, polishTitle, changeImageSize(movie.getImageURL()), movie.getYear(), movie.getCast(),
-                                        movieInfo.getDuration(), descriptionList, movieInfo.getPlot(), type));
+                    modal.add(new Modal(id, polishTitle, movie.getImageURL(), String.valueOf(Methods.preventNullInteger(movie.getYear())),
+                                        movie.getCast(), String.valueOf(Methods.preventNullInteger(movieInfo.getDuration())),
+                                        descriptionList, movieInfo.getPlot(), type));
                 }
             }
         }
@@ -58,8 +60,9 @@ public class PrepareModal extends HttpServlet {
                     } catch (Exception e) {
                     }
 
-                    modal.add(new Modal(id, polishTitle, changeImageSize(series.getImageURL()), series.getYear(), series.getCast(),
-                            seriesInfo.getDuration(), descriptionList, seriesInfo.getPlot(), type));
+                    modal.add(new Modal(id, polishTitle, series.getImageURL(), String.valueOf(Methods.preventNullInteger(series.getYear())),
+                                        series.getCast(), String.valueOf(Methods.preventNullInteger(seriesInfo.getDuration())),
+                                        descriptionList, seriesInfo.getPlot(), type));
                 }
             }
         }
@@ -178,20 +181,5 @@ public class PrepareModal extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    }
-
-    private String changeImageSize(String url){
-        String image;
-        String[] imageParts;
-
-        imageParts = url.split("[.]");
-        imageParts[imageParts.length - 2] = "6";
-        image = imageParts[0];
-
-        for(int i = 0; i < imageParts.length - 1; i++){
-            image += "." + imageParts[i + 1];
-        }
-
-        return image;
     }
 }

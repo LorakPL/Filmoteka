@@ -30,7 +30,7 @@ $(document).ready(function() {
                 var rowNew2 = $("<div class=\"responsive\">" +
                                     "<div class=\"gallery\">" +
                                         "<a target=\"_blank\">" +
-                                            "<img id=\"" + String(id) + "\" src=\"" + String(picture) + "\" alt=\"" + String(polishTitle) + "\" onclick=\"addMovie(" + id + ", " + "'"+ polishTitle + "'" + ", " + "'" + type + "'" + ")\">" +
+                                            "<img id=\"" + String(id) + "\" src=\"" + String(picture) + "\" alt=\"" + String(polishTitle) + "\" onclick=\"addMovie(" + id + ", " + "'"+ String(polishTitle) + "'" + ", " + "'" + type + "'" + ")\">" +
                                         "</a>" +
                                     "</div>" +
                                 "</div>");
@@ -96,7 +96,6 @@ function addMovie(id, title, movieOrSeries) {
             var descriptionList = value['descriptionList'];
             var plot = value['plot'];
 
-
             var pictureRow = $("<div class=\"responsive\">" +
                                     "<div class=\"gallery\">" +
                                         "<a target=\"_blank\">" +
@@ -133,16 +132,16 @@ function addMovie(id, title, movieOrSeries) {
                                     "</tr>" +
                                     "<tr>" +
                                         "<td><b>Kolumna:</b></td>" +
-                                        "<td>" + "<input class=\"modalInput\" type=\"text\" name=\"column\" required />" + "</td>" +
+                                        "<td>" + "<input id=\"columnInput\" class=\"modalInput\" type=\"text\" name=\"column\" required />" + "</td>" +
                                     "</tr>" +
                                     "<tr>" +
                                         "<td><b>Rząd:</b></td>" +
-                                        "<td>" + "<input class=\"modalInput\" type=\"text\" name=\"row\" required />" + "</td>" +
+                                        "<td>" + "<input id=\"rowInput\" class=\"modalInput\" type=\"text\" name=\"row\" required />" + "</td>" +
                                     "</tr>" +
                                     "<tr>" +
                                         "<td><b>Gatunek:</b></td>" +
                                         "<td>" +
-                                            "<select class=\"modalSelect\">" +
+                                            "<select id=\"genreSelect\" class=\"modalSelect\">" +
                                                 "<option>Komedia</option>" +
                                                 "<option>Akcja</option>" +
                                                 "<option>Sensacja</option>" +
@@ -152,14 +151,14 @@ function addMovie(id, title, movieOrSeries) {
                                     "<tr>" +
                                         "<td><b>Kraj pochodzenia:</b></td>" +
                                         "<td>" +
-                                        "<select class=\"modalSelect\">" +
-                                            "<option>Polski</option>" +
+                                        "<select id=\"countrySelect\" class=\"modalSelect\">" +
+                                            "<option>Polska</option>" +
                                             "<option>Zagraniczny</option>" +
                                         "</select>" +
                                         "</td>" +
                                     "</tr>" +
                                 "</table>" +
-                                "<button class=\"button button2\">Dodaj</button>" +
+                                "<button class=\"button button2\" onclick=\"checkFormInModal()\">Dodaj</button>" +
                             "</div>");
 
             /*
@@ -192,7 +191,7 @@ function addMovie(id, title, movieOrSeries) {
             //alert(id + " " + cast + " " + title + " " + polishTitle + " " + year + " " + bigPicture + " " + smallPicture + " " + type);
         });
     });
-        setTimeout(function(){ loading() }, 1000);
+        setTimeout(function(){ loading() }, 1500);
         //alert("Wrocilo");
     modal2.style.display = "block";
     //modal.style.display = "block";
@@ -201,4 +200,30 @@ function addMovie(id, title, movieOrSeries) {
 function loading() {
     modal2.style.display = "none";
     modal.style.display = "block";
+}
+
+function checkFormInModal() {
+    var column = $('#columnInput').val();
+    var row = $('#rowInput').val();
+    var genre = $('#genreSelect').val();
+    var country = $('#countrySelect').val();
+    if (isNaN(column) || column < 1 || column > 10) {
+        alert("Wartość w polu kolumna jest błędna")
+    }
+    else if (isNaN(row) || row < 1 || row > 10) {
+        alert("Wartość w polu rząd jest błędna")
+    }
+    else{
+        addToDatabase(column, row, genre, country)
+    }
+}
+
+function addToDatabase(column, row, genre, country) {
+    alert(column + "  " + row + "  " + genre + "  " + country);
+
+    var data = [column, row, genre, country];
+    $.post("AddToDatabaseServlet", {json:data}, function(responseJson) {
+            alert(responseJson);
+            modal.style.display = "none";
+    });
 }

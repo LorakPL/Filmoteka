@@ -6,23 +6,23 @@ public class Modal {
     private Long filmwebId;
     private String polishTitle;
     private String image_6;
-    private int year;
+    private String year;
     private String cast;
-    private int duration;
+    private String duration;
     private List<String> descriptionList;
     private String plot;
     private String type;
 
-    public Modal(Long filmwebId, String polishTitle, String image_6, int year, String cast, int duration,
+    public Modal(Long filmwebId, String polishTitle, String image, String year, String cast, String duration,
                  List<String> descriptionList, String plot, String type){
         this.setFilmwebId(filmwebId);
-        this.setPolishTitle(polishTitle);
-        this.setImage_6(image_6);
-        this.setYear(year);
-        this.setCast(cast);
-        this.setDuration(duration);
+        this.setPolishTitle(Methods.preventNull(polishTitle));
+        this.setImage_6(Methods.changeImageSize(image, "6" ));
+        this.setYear(Methods.preventNull(year));
+        this.setCast(Methods.preventNull(cast));
+        this.setDuration(Methods.preventNull(duration));
         this.setDescriptionList(descriptionList);
-        this.setPlot(plot);
+        this.setPlot(Methods.preventNull(plot));
         this.setType(type);
     }
 
@@ -50,11 +50,11 @@ public class Modal {
         return image_6;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
-    public int getYear(){
+    public String getYear(){
         return year;
     }
 
@@ -66,11 +66,11 @@ public class Modal {
         return cast;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 
-    public int getDuration() {
+    public String getDuration() {
         return duration;
     }
 

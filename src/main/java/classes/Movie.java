@@ -14,9 +14,9 @@ public class Movie {
     private String image_4;
     private String image_5;
     private String image_6;
-    private int year;
+    private String year;
     private String cast;
-    private int duration;
+    private String duration;
     private String productionCountry;
     private String filmwebGenre;
     //private String description;
@@ -27,9 +27,11 @@ public class Movie {
     private int row;
     private String countryType; //Polish or foreign
 
+    public Movie(){}
+
     public Movie (int id, Long filmwebId, String originalTitle, String polishTitle,
                   String image_0, String image_1, String image_2, String image_3,
-                  String image_4, String image_5, String image_6, int year, String cast, int duration,
+                  String image_4, String image_5, String image_6, String year, String cast, String duration,
                   String productionCountry, String filmwebGenre, List<String> descriptionList, String plot){
         this.setId(id);
         this.setFilmwebId(filmwebId);
@@ -53,8 +55,8 @@ public class Movie {
 
     public Movie (int id, Long filmwebId, String originalTitle, String polishTitle,
                   String image_0, String image_1, String image_2, String image_3,
-                  String image_4, String image_5, String image_6, int year, String cast,
-                  int duration, String productionCountry, String filmwebGenre, List<String> descriptionList,
+                  String image_4, String image_5, String image_6, String year, String cast,
+                  String duration, String productionCountry, String filmwebGenre, List<String> descriptionList,
                   String plot, String genre, int column, int row, String countryType){
         this.setId(id);
         this.setFilmwebId(filmwebId);
@@ -193,11 +195,11 @@ public class Movie {
         return image_6;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
@@ -209,11 +211,11 @@ public class Movie {
         return cast;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 
-    public int getDuration() {
+    public String getDuration() {
         return duration;
     }
 

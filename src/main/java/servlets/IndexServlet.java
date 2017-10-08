@@ -41,11 +41,11 @@ public class IndexServlet extends HttpServlet {
         ArrayList<Gallery> gallery = new ArrayList<Gallery>(); // Lista elementow, ktore zostana wyswietlone w postaci galerii
 
         for(FilmSearchResult movie : filmList){
-            moviesGallery.add(new Gallery(movie.getId(), changeImageSize(movie.getImageURL(), "6"), movie.getPolishTitle(), "Film"));
+            moviesGallery.add(new Gallery(movie.getId(), movie.getImageURL(), movie.getPolishTitle(), "Film"));
         }
 
         for(FilmSearchResult TVseries : seriesList){
-            seriesGallery.add(new Gallery(TVseries.getId(), changeImageSize(TVseries.getImageURL(), "6"), TVseries.getPolishTitle(), "Serial"));
+            seriesGallery.add(new Gallery(TVseries.getId(), TVseries.getImageURL(), TVseries.getPolishTitle(), "Serial"));
         }
 
         gallery.addAll(moviesGallery);
@@ -139,20 +139,5 @@ public class IndexServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
-
-    private String changeImageSize(String url, String imageSize){
-        String image;
-        String[] imageParts;
-
-        imageParts = url.split("[.]");
-        imageParts[imageParts.length - 2] = imageSize;
-        image = imageParts[0];
-
-        for(int i = 0; i < imageParts.length - 1; i++){
-            image += "." + imageParts[i + 1];
-        }
-
-        return image;
     }
 }
