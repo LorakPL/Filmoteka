@@ -11,7 +11,7 @@ public class Gallery {
     private String image_6;
     private String type;
 
-    //public Gallery(){};
+    public Gallery(){};
 
     public  Gallery(Long id, String image_6, String polishTitle, String type){
         this.setFilmwebId(id);

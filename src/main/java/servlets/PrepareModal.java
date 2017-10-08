@@ -24,8 +24,51 @@ import java.util.List;
 public class PrepareModal extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String[] clickedPhoto = request.getParameterValues("json[]");
+        Long id = Long.parseLong(clickedPhoto[0]);
+        String polishTitle = clickedPhoto[1];
+        String type = clickedPhoto[2];
+        FilmwebApi filmwebApi = new FilmwebApi();
+        List<FilmSearchResult> filmList = filmwebApi.findFilm(polishTitle);
+        List<FilmSearchResult> seriesList = filmwebApi.findSeries(polishTitle);
+        Film movieInfo = new Film();
+        info.talacha.filmweb.models.Series seriesInfo = new info.talacha.filmweb.models.Series();
+        List<String> descriptionList = null;
+        ArrayList<Modal> modal = new ArrayList<Modal>();
+
+        if(type.equals("Film")) {
+            for (FilmSearchResult movie : filmList) {
+                if (movie.getId().equals(id)) {
+                    try {
+                        movieInfo = filmwebApi.getFilmData(movie.getId());
+                        descriptionList = filmwebApi.getDescriptions(movie.getId());
+                    } catch (Exception e) {
+                    }
+
+                    modal.add(new Modal(id, polishTitle, changeImageSize(movie.getImageURL()), movie.getYear(), movie.getCast(),
+                                        movieInfo.getDuration(), descriptionList, movieInfo.getPlot(), type));
+                }
+            }
+        }
+        else if(type.equals("Serial")){
+            for (FilmSearchResult series : seriesList) {
+                if (series.getId().equals(id)) {
+                    try {
+                        seriesInfo = filmwebApi.getSeriesData(series.getId());
+                        descriptionList = filmwebApi.getDescriptions(series.getId());
+                    } catch (Exception e) {
+                    }
+
+                    modal.add(new Modal(id, polishTitle, changeImageSize(series.getImageURL()), series.getYear(), series.getCast(),
+                            seriesInfo.getDuration(), descriptionList, seriesInfo.getPlot(), type));
+                }
+            }
+        }
+
+        /*
+        String[] clickedPhoto = request.getParameterValues("json[]");
         ArrayList<Gallery> gallery = (ArrayList<Gallery>)request.getSession().getAttribute("gallery");
         Long id = Long.parseLong(clickedPhoto[0]);
+        String polishTitle = clickedPhoto[1];
         FilmwebApi filmwebApi = new FilmwebApi();
         Film movieInfo = new Film();
         info.talacha.filmweb.models.Series seriesInfo = new info.talacha.filmweb.models.Series();
@@ -33,7 +76,51 @@ public class PrepareModal extends HttpServlet {
         List<FilmSearchResult> filmList;
         List<FilmSearchResult> seriesList;
         ArrayList<Modal> modal = new ArrayList<Modal>();
+        Gallery galleryObject = new Gallery();
 
+        for(Gallery object : gallery){
+            if(id.equals(object.getFilmwebId())){
+                galleryObject = object;
+            }
+        }
+
+        if(galleryObject.getType().equals("Film")){
+            filmList = filmwebApi.findFilm(galleryObject.getPolishTitle());
+            for(FilmSearchResult movie : filmList){
+                if(movie.getId().equals(id)){
+                    try{
+                        movieInfo = filmwebApi.getFilmData(galleryObject.getFilmwebId());
+                        descriptionList = filmwebApi.getDescriptions(galleryObject.getFilmwebId());
+                    }
+                    catch (Exception e){ }
+
+                    modal.add(new Modal(galleryObject.getFilmwebId(), galleryObject.getPolishTitle(), galleryObject.getImage_6(),
+                            movie.getYear(), movie.getCast(), movieInfo.getDuration(), descriptionList,
+                            movieInfo.getPlot(), galleryObject.getType()));
+                    break;
+                }
+            }
+        }
+        else if(galleryObject.getType().equals("Serial")){
+            seriesList = filmwebApi.findSeries(galleryObject.getPolishTitle());
+            for(FilmSearchResult series : seriesList){
+                if(series.getId().equals(id)){
+                    try{
+                        seriesInfo = filmwebApi.getSeriesData(galleryObject.getFilmwebId());
+                        descriptionList = filmwebApi.getDescriptions(galleryObject.getFilmwebId());
+                    }
+                    catch (Exception e){ }
+
+                    modal.add(new Modal(galleryObject.getFilmwebId(), galleryObject.getPolishTitle(), galleryObject.getImage_6(),
+                            series.getYear(), series.getCast(), seriesInfo.getDuration(), descriptionList,
+                            seriesInfo.getPlot(), galleryObject.getType()));
+                    break;
+                }
+            }
+        }
+        */
+
+        /*
         for(Gallery object : gallery){
             if(id.equals(object.getFilmwebId())){
                 if(object.getType().equals("Film")){
@@ -79,6 +166,7 @@ public class PrepareModal extends HttpServlet {
             System.out.println(tmp);
         }
 
+        */
 
         Gson gson = new Gson();
         JsonElement element = gson.toJsonTree(modal, new TypeToken<List<Modal>>() {}.getType());
@@ -90,5 +178,20 @@ public class PrepareModal extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    }
+
+    private String changeImageSize(String url){
+        String image;
+        String[] imageParts;
+
+        imageParts = url.split("[.]");
+        imageParts[imageParts.length - 2] = "6";
+        image = imageParts[0];
+
+        for(int i = 0; i < imageParts.length - 1; i++){
+            image += "." + imageParts[i + 1];
+        }
+
+        return image;
     }
 }

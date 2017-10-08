@@ -26,10 +26,11 @@ $(document).ready(function() {
                 var id = value['filmwebId'];
                 var picture = value['image_6'];
                 var polishTitle = value['polishTitle'];
+                var type = value['type'];
                 var rowNew2 = $("<div class=\"responsive\">" +
                                     "<div class=\"gallery\">" +
                                         "<a target=\"_blank\">" +
-                                            "<img id=\"" + String(id) + "\" src=\"" + String(picture) + "\" alt=\"" + String(polishTitle) + "\" onclick=\"addMovie(" + String(id) + ")\">" +
+                                            "<img id=\"" + String(id) + "\" src=\"" + String(picture) + "\" alt=\"" + String(polishTitle) + "\" onclick=\"addMovie(" + id + ", " + "'"+ polishTitle + "'" + ", " + "'" + type + "'" + ")\">" +
                                         "</a>" +
                                     "</div>" +
                                 "</div>");
@@ -45,7 +46,9 @@ $(document).ready(function() {
 
 // Get the modal
 var modal = document.getElementById('myModal');
+var modal2 = document.getElementById('myModal2');
 
+/*
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
 
@@ -61,6 +64,7 @@ btn.onclick = function() {
 span.onclick = function() {
     modal.style.display = "none";
 }
+*/
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
@@ -70,12 +74,12 @@ window.onclick = function(event) {
 }
 
 
-function addMovie(id) {
+function addMovie(id, title, movieOrSeries) {
     var myNode = document.getElementById("modalDiv");
     while (myNode.firstChild) {
         myNode.removeChild(myNode.firstChild); // ---------- Czyszczenie diva zawierajacego modal
     }
-    var data = [id];
+    var data = [id, title, movieOrSeries];
     $.post("PrepareModal", {json:data}, function(responseJson) {
         while (myNode.firstChild) {
             myNode.removeChild(myNode.firstChild); // ---------- Czyszczenie diva zawierajacego modal
@@ -127,13 +131,74 @@ function addMovie(id) {
                                         "<td><b>Opis:</b></td>" +
                                         "<td>" + String(plot) + "</td>" +
                                     "</tr>" +
+                                    "<tr>" +
+                                        "<td><b>Kolumna:</b></td>" +
+                                        "<td>" + "<input class=\"modalInput\" type=\"text\" name=\"column\" required />" + "</td>" +
+                                    "</tr>" +
+                                    "<tr>" +
+                                        "<td><b>Rząd:</b></td>" +
+                                        "<td>" + "<input class=\"modalInput\" type=\"text\" name=\"row\" required />" + "</td>" +
+                                    "</tr>" +
+                                    "<tr>" +
+                                        "<td><b>Gatunek:</b></td>" +
+                                        "<td>" +
+                                            "<select class=\"modalSelect\">" +
+                                                "<option>Komedia</option>" +
+                                                "<option>Akcja</option>" +
+                                                "<option>Sensacja</option>" +
+                                            "</select>" +
+                                        "</td>" +
+                                    "</tr>" +
+                                    "<tr>" +
+                                        "<td><b>Kraj pochodzenia:</b></td>" +
+                                        "<td>" +
+                                        "<select class=\"modalSelect\">" +
+                                            "<option>Polski</option>" +
+                                            "<option>Zagraniczny</option>" +
+                                        "</select>" +
+                                        "</td>" +
+                                    "</tr>" +
                                 "</table>" +
+                                "<button class=\"button button2\">Dodaj</button>" +
                             "</div>");
 
+            /*
+
+            var formRow = $("<div class=\"modalForm\">" +
+                                "<form id=\"modalForm\">" +
+                                    "<div class=\"field-container\">" +
+                                        "<input type=\"text\" class=\"field\" required placeholder=\"First name\"/>" +
+                                        "<label class=\"floating-label\">First name</label>" +
+                                    "</div>" +
+                                    "<div class=\"field-container\">" +
+                                        "<input type=\"text\" class=\"field\" required placeholder=\"Last name\"/>" +
+                                        "<label class=\"floating-label\">Last name</label>" +
+                                    "</div>" +
+                                    "<div class=\"field-container\">" +
+                                        "<select class=\"field\" placeholder=\"Options\">" +
+                                            "<option></option>" +
+                                            "<option>option 1</option>" +
+                                            "<option>option 2</option>" +
+                                        "</select>" +
+                                        "<label class=\"floating-label\">Options</label>" +
+                                    "</div>" +
+                                "</form>" +
+                            "</div>");
+
+                            */
 
             tableRow.appendTo(modal);
+            //formRow.appendTo(modal);
             //alert(id + " " + cast + " " + title + " " + polishTitle + " " + year + " " + bigPicture + " " + smallPicture + " " + type);
         });
     });
+        setTimeout(function(){ loading() }, 1000);
+        //alert("Wrocilo");
+    modal2.style.display = "block";
+    //modal.style.display = "block";
+}
+
+function loading() {
+    modal2.style.display = "none";
     modal.style.display = "block";
 }
