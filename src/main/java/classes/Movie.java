@@ -19,8 +19,7 @@ public class Movie {
     private String duration;
     private String productionCountry;
     private String filmwebGenre;
-    //private String description;
-    private List<String> descriptionList;
+    private String description;
     private String plot;
     private String genre;
     private int column;
@@ -32,7 +31,7 @@ public class Movie {
     public Movie (int id, Long filmwebId, String originalTitle, String polishTitle,
                   String image_0, String image_1, String image_2, String image_3,
                   String image_4, String image_5, String image_6, String year, String cast, String duration,
-                  String productionCountry, String filmwebGenre, List<String> descriptionList, String plot){
+                  String productionCountry, String filmwebGenre, String description, String plot){
         this.setId(id);
         this.setFilmwebId(filmwebId);
         this.setOriginalTitle(originalTitle);
@@ -49,14 +48,14 @@ public class Movie {
         this.setDuration(duration);
         this.setProductionCountry(productionCountry);
         this.setFilmwebGenre(filmwebGenre);
-        this.setDescriptionList(descriptionList);
+        this.setDescription(description);
         this.setPlot(plot);
     }
 
     public Movie (int id, Long filmwebId, String originalTitle, String polishTitle,
                   String image_0, String image_1, String image_2, String image_3,
                   String image_4, String image_5, String image_6, String year, String cast,
-                  String duration, String productionCountry, String filmwebGenre, List<String> descriptionList,
+                  String duration, String productionCountry, String filmwebGenre, String description,
                   String plot, String genre, int column, int row, String countryType){
         this.setId(id);
         this.setFilmwebId(filmwebId);
@@ -75,8 +74,7 @@ public class Movie {
         this.setPlot(plot);
         this.setProductionCountry(productionCountry);
         this.setFilmwebGenre(filmwebGenre);
-        this.setDescriptionList(descriptionList);
-        //this.setDescription(description);
+        this.setDescription(description);
         this.setGenre(genre);
         this.setColumn(column);
         this.setRow(row);
@@ -235,12 +233,12 @@ public class Movie {
         return filmwebGenre;
     }
 
-    public void setDescriptionList(List<String> descriptionList){
-        this.descriptionList = descriptionList;
+    public void setDescription(String description){
+        this.description = description;
     }
 
-    public List<String> getDescriptionList() {
-        return descriptionList;
+    public String getDescription() {
+        return this.description;
     }
 
     /*

@@ -1,6 +1,11 @@
 package servlets;
 
 import classes.Modal;
+import classes.Movie;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,13 +36,40 @@ public class AddToDatabaseServlet extends HttpServlet {
             System.out.println(tmp.getProductionCountry());
             System.out.println(tmp.getFilmwebGenre());
 
-            for(String tmp2 : tmp.getDescriptionList()){
-                opis += tmp2;
-                opis += " ";
-            }
+            opis = String.join(" ", tmp.getDescriptionList());
 
             System.out.println("-----------------------");
             System.out.println(opis);
+            if("Film".equals(tmp.getType())) {   //Change "Film" to constant
+                Movie movie = new Movie();
+                movie.setFilmwebId(tmp.getFilmwebId());
+                movie.setOriginalTitle(tmp.getOriginalTitle());
+                movie.setPolishTitle(tmp.getPolishTitle());
+                movie.setImage_6(tmp.getImage_6()); //add set another images
+                movie.setYear(tmp.getYear());
+                movie.setCast(tmp.getCast());
+                movie.setDuration(tmp.getDuration());
+                movie.setProductionCountry(tmp.getProductionCountry());
+                movie.setFilmwebGenre(tmp.getFilmwebGenre());
+                movie.setDescription(opis);
+                movie.setPlot(tmp.getPlot());
+                //movie.setGenre(tmp.getGenre()); //tmp.getGenre() not implemented yet
+                //movie.setColumn(tmp.getColumn()); //like above
+                //movie.setRow(tmp.getRow()) //like above
+                //movie.setCountryType(tmp.getCountryType()); //like above
+                SessionFactory sessionFactory;
+                sessionFactory = new Configuration()
+                        .configure() // configures settings from hibernate.cfg.xml
+                        .buildSessionFactory();
+
+                Session session = sessionFactory.openSession();
+                Transaction tx = session.beginTransaction();
+                session.save(movie);
+                tx.commit();
+                session.close();
+            } else if ("Serial".equals(tmp.getType())) {
+
+            }
         }
 
 
