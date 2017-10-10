@@ -12,16 +12,60 @@ public class Modal {
     private List<String> descriptionList;
     private String plot;
     private String type;
+    private String originalTitle;
+    private String productionCountry;
+    private String filmwebGenre;
+    private String numberOfEpisodes;
+    private String numberOfSeasons;
+
+    public Modal(Long filmwebId, String polishTitle, String originalTitle, String image,
+                 String year, String cast, String duration, List<String> descriptionList,
+                 String plot, String type, String productionCountry, String filmwebGenre){
+        this.setFilmwebId(filmwebId);
+        this.setPolishTitle(Methods.preventNull(polishTitle));
+        this.setOriginalTitle(Methods.preventNull(originalTitle));
+        this.setImage_6(Methods.changeImageSize(image, "6"));
+        this.setYear(year);
+        this.setCast(Methods.preventNull(cast));
+        this.setDuration(duration);
+        this.setDescriptionList(descriptionList);
+        this.setPlot(Methods.preventNull(plot));
+        this.setType(type);
+        this.setProductionCountry(Methods.preventNull(productionCountry));
+        this.setFilmwebGenre(Methods.preventNull(filmwebGenre));
+
+    } // ------------- > Ten Modal bedzie castowany na Movie
+
+    public Modal(Long filmwebId, String polishTitle, String originalTitle, String image,
+                 String year, String cast, String duration, List<String> descriptionList,
+                 String plot, String type, String productionCountry, String filmwebGenre,
+                 String numberOfEpisodes, String numberOfSeasons){
+        this.setFilmwebId(filmwebId);
+        this.setPolishTitle(Methods.preventNull(polishTitle));
+        this.setOriginalTitle(Methods.preventNull(originalTitle));
+        this.setImage_6(Methods.changeImageSize(image, "6"));
+        this.setYear(year);
+        this.setCast(Methods.preventNull(cast));
+        this.setDuration(duration);
+        this.setDescriptionList(descriptionList);
+        this.setPlot(Methods.preventNull(plot));
+        this.setType(type);
+        this.setProductionCountry(Methods.preventNull(productionCountry));
+        this.setFilmwebGenre(Methods.preventNull(filmwebGenre));
+        this.setNumberOfEpisodes(Methods.preventNull(numberOfEpisodes));
+        this.setNumberOfSeasons(Methods.preventNull(numberOfSeasons));
+
+    } // ------------- > Ten Modal bedzie castowany na Series
+
 
     public Modal(Long filmwebId, String polishTitle, String image, String year, String cast, String duration,
-                 List<String> descriptionList, String plot, String type){
+                 String plot, String type){
         this.setFilmwebId(filmwebId);
         this.setPolishTitle(Methods.preventNull(polishTitle));
         this.setImage_6(Methods.changeImageSize(image, "6" ));
         this.setYear(Methods.preventNull(year));
         this.setCast(Methods.preventNull(cast));
         this.setDuration(Methods.preventNull(duration));
-        this.setDescriptionList(descriptionList);
         this.setPlot(Methods.preventNull(plot));
         this.setType(type);
     }
@@ -96,5 +140,45 @@ public class Modal {
 
     public String getType() {
         return type;
+    }
+
+    public void setOriginalTitle(String originalTitle) {
+        this.originalTitle = originalTitle;
+    }
+
+    public String getOriginalTitle() {
+        return originalTitle;
+    }
+
+    public void setProductionCountry(String productionCountry) {
+        this.productionCountry = productionCountry;
+    }
+
+    public String getProductionCountry() {
+        return productionCountry;
+    }
+
+    public void setFilmwebGenre(String filmwebGenre) {
+        this.filmwebGenre = filmwebGenre;
+    }
+
+    public String getFilmwebGenre() {
+        return filmwebGenre;
+    }
+
+    public void setNumberOfEpisodes(String numberOfEpisodes) {
+        this.numberOfEpisodes = numberOfEpisodes;
+    }
+
+    public String getNumberOfEpisodes() {
+        return numberOfEpisodes;
+    }
+
+    public void setNumberOfSeasons(String numberOfSeasons) {
+        this.numberOfSeasons = numberOfSeasons;
+    }
+
+    public String getNumberOfSeasons() {
+        return numberOfSeasons;
     }
 }

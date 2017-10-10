@@ -4,5 +4,63 @@
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping>
-   
+    <class name="classes.Movie" table="Movie">
+        <meta attribute="class-description">
+            This class contains the user detail.
+        </meta>
+        <id name="id" type="int" column="movieId">
+            <generator class="native"/>
+        </id>
+        <property name="filmwebId" column="filmwebId" type="int"/>
+        <property name="polishTitle" column="polishTitle" type="string"/>
+        <property name="image_0" column="image_0" type="string"/>
+        <property name="image_1" column="image_1" type="string"/>
+        <property name="image_2" column="image_2" type="string"/>
+        <property name="image_3" column="image_3" type="string"/>
+        <property name="image_4" column="image_4" type="string"/>
+        <property name="image_5" column="image_5" type="string"/>
+        <property name="image_6" column="image_6" type="string"/>
+        <property name="year" column="year" type="string"/>
+        <property name="cast" column="cast" type="string"/>
+        <property name="duration" column="duration" type="string"/>
+        <property name="productionCountry" column="productionCountry" type="string"/>
+        <property name="filmwebGenre" column="filmwebGenre" type="string"/>
+        <property name="description" column="description" type="string"/>
+        <property name="plot" column="plot" type="string"/>
+        <property name="genre" column="genre" type="string"/>
+        <property name="column" column="column" type="int"/>
+        <property name="row" column="row" type="int"/>
+        <property name="countryType" column="countryType" type="string"/>
+    </class>
+
+    <class name="classes.Series" table="Series">
+        <meta attribute="class-description">
+            This class contains the user detail.
+        </meta>
+        <id name="id" type="int" column="seriesId">
+            <generator class="native"/>
+        </id>
+        <property name="filmwebId" column="filmwebId" type="int"/>
+        <property name="polishTitle" column="polishTitle" type="string"/>
+        <property name="image_0" column="image_0" type="string"/>
+        <property name="image_1" column="image_1" type="string"/>
+        <property name="image_2" column="image_2" type="string"/>
+        <property name="image_3" column="image_3" type="string"/>
+        <property name="image_4" column="image_4" type="string"/>
+        <property name="image_5" column="image_5" type="string"/>
+        <property name="image_6" column="image_6" type="string"/>
+        <property name="year" column="year" type="string"/>
+        <property name="cast" column="cast" type="string"/>
+        <property name="duration" column="duration" type="string"/>
+        <property name="productionCountry" column="productionCountry" type="string"/>
+        <property name="filmwebGenre" column="filmwebGenre" type="string"/>
+        <property name="description" column="description" type="string"/>
+        <property name="plot" column="plot" type="string"/>
+        <property name="genre" column="genre" type="string"/>
+        <property name="column" column="column" type="int"/>
+        <property name="row" column="row" type="int"/>
+        <property name="countryType" column="countryType" type="string"/>
+        <property name="numberOfEpisodes" column="countrnumberOfEpisodesyType" type="string"/>
+        <property name="numberOfSeasons" column="numberOfSeasons" type="string"/>
+    </class>
 </hibernate-mapping>

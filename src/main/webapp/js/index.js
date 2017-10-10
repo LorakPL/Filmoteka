@@ -93,7 +93,6 @@ function addMovie(id, title, movieOrSeries) {
             var image_6 = value['image_6'];
             var type = value['type'];
             var duration = value['duration'];
-            var descriptionList = value['descriptionList'];
             var plot = value['plot'];
 
             var pictureRow = $("<div class=\"responsive\">" +

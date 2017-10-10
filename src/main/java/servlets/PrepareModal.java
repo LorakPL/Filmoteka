@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class PrepareModal extends HttpServlet {
         info.talacha.filmweb.models.Series seriesInfo = new info.talacha.filmweb.models.Series();
         List<String> descriptionList = null;
         ArrayList<Modal> modal = new ArrayList<Modal>();
+        ArrayList<Modal> modalToSend = new ArrayList<Modal>();
 
         if(type.equals("Film")) {
             for (FilmSearchResult movie : filmList) {
@@ -47,7 +49,11 @@ public class PrepareModal extends HttpServlet {
 
                     modal.add(new Modal(id, polishTitle, movie.getImageURL(), String.valueOf(Methods.preventNullInteger(movie.getYear())),
                                         movie.getCast(), String.valueOf(Methods.preventNullInteger(movieInfo.getDuration())),
-                                        descriptionList, movieInfo.getPlot(), type));
+                                        movieInfo.getPlot(), type));
+
+                    modalToSend.add(new Modal(id, polishTitle, movie.getTitle(), movie.getImageURL(), String.valueOf(Methods.preventNullInteger(movie.getYear())),
+                                            movie.getCast(), String.valueOf(Methods.preventNullInteger(movieInfo.getDuration())), descriptionList,
+                                            movieInfo.getPlot(), type, movieInfo.getCountries(), movieInfo.getGenre()));
                 }
             }
         }
@@ -62,7 +68,12 @@ public class PrepareModal extends HttpServlet {
 
                     modal.add(new Modal(id, polishTitle, series.getImageURL(), String.valueOf(Methods.preventNullInteger(series.getYear())),
                                         series.getCast(), String.valueOf(Methods.preventNullInteger(seriesInfo.getDuration())),
-                                        descriptionList, seriesInfo.getPlot(), type));
+                                        seriesInfo.getPlot(), type));
+
+                    modalToSend.add(new Modal(id, polishTitle, series.getTitle(), series.getImageURL(), String.valueOf(Methods.preventNullInteger(series.getYear())),
+                            series.getCast(), String.valueOf(Methods.preventNullInteger(seriesInfo.getDuration())), descriptionList,
+                            seriesInfo.getPlot(), type, seriesInfo.getCountries(), seriesInfo.getGenre(), String.valueOf(Methods.preventNullInteger(seriesInfo.getEpisodesCount())),
+                            String.valueOf(Methods.preventNullInteger(seriesInfo.getSeasonsCount()))));
                 }
             }
         }
@@ -170,6 +181,8 @@ public class PrepareModal extends HttpServlet {
         }
 
         */
+
+        request.getSession().setAttribute("modalToSend", modalToSend); // "modalToSend" - id po ktorym bede szukal w sesji
 
         Gson gson = new Gson();
         JsonElement element = gson.toJsonTree(modal, new TypeToken<List<Modal>>() {}.getType());
