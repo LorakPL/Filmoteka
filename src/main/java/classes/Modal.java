@@ -72,6 +72,15 @@ public class Modal {
         this.setType(type);
     }
 
+    public Modal(String polishTitle, String image, String year, String duration, String cast, String plot){
+        this.setPolishTitle(polishTitle);
+        this.setImage_6(image);
+        this.setYear(year);
+        this.setCast(cast);
+        this.setDuration(duration);
+        this.setPlot(plot);
+    } // ------------- > Ten Modal bedzie tabela w allMovies
+
     public void setFilmwebId(Long filmwebId) {
         this.filmwebId = filmwebId;
     }

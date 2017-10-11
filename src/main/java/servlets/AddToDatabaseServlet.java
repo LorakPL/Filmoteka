@@ -6,6 +6,7 @@ import classes.Series;
 import classes.Movie;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
@@ -14,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.awt.image.RescaleOp;
 import java.io.IOException;
 
 @WebServlet("/AddToDatabaseServlet")
@@ -40,30 +42,43 @@ public class AddToDatabaseServlet extends HttpServlet {
 
                 Session session = sessionFactory.openSession();
                 Criteria criteria = session.createCriteria(Movie.class);
-                criteria.add(Restrictions.eq("filmwebId", modal.getFilmwebId()));
+                criteria.add(Restrictions.eq("column", column));
+                criteria.add(Restrictions.eq("row", row));
                 criteria.setProjection(Projections.rowCount());
                 count = ((Long)criteria.uniqueResult()).intValue();
-                session.getTransaction().commit();
-                if(count == 0){
-                    Movie movie = new Movie(modal.getFilmwebId(), modal.getOriginalTitle(), modal.getPolishTitle(),
-                            Methods.changeImageSize(modal.getImage_6(), "0"), Methods.changeImageSize(modal.getImage_6(), "1"),
-                            Methods.changeImageSize(modal.getImage_6(), "2"), Methods.changeImageSize(modal.getImage_6(), "3"),
-                            Methods.changeImageSize(modal.getImage_6(), "4"), Methods.changeImageSize(modal.getImage_6(), "5"),
-                            modal.getImage_6(), modal.getYear(), modal.getCast(), modal.getDuration(), modal.getProductionCountry(),
-                            modal.getFilmwebGenre(), Methods.preventNull(description), modal.getPlot(), genre, column, row, country);
 
-                    Transaction tx = session.beginTransaction();
-                    session.save(movie);
-                    tx.commit();
-                    session.close();
+                if(count == 0){
+                    Criteria criteria2 = session.createCriteria(Movie.class);
+                    criteria2.add(Restrictions.eq("filmwebId", modal.getFilmwebId()));
+                    criteria2.setProjection(Projections.rowCount());
+                    count = ((Long)criteria.uniqueResult()).intValue();
+                    //session.getTransaction().commit();
+                    if(count == 0){
+                        Movie movie = new Movie(modal.getFilmwebId(), modal.getOriginalTitle(), modal.getPolishTitle(),
+                                Methods.changeImageSize(modal.getImage_6(), "0"), Methods.changeImageSize(modal.getImage_6(), "1"),
+                                Methods.changeImageSize(modal.getImage_6(), "2"), Methods.changeImageSize(modal.getImage_6(), "3"),
+                                Methods.changeImageSize(modal.getImage_6(), "4"), Methods.changeImageSize(modal.getImage_6(), "5"),
+                                modal.getImage_6(), modal.getYear(), modal.getCast(), modal.getDuration(), modal.getProductionCountry(),
+                                modal.getFilmwebGenre(), Methods.preventNull(description), modal.getPlot(), genre, column, row, country);
+
+                        Transaction tx = session.beginTransaction();
+                        session.save(movie);
+                        tx.commit();
+                        session.close();
+                        databaseResponse = "Film dodano do bazy";
+                    }
+                    else{
+                        databaseResponse = "Niestety taki film jest już w bazie";
+                        session.close();
+                    }
                 }
                 else{
-                    databaseResponse = "Niestety taki film jest już w bazie";
+                    databaseResponse = "Niestety jakiś inny film znaduje się na tej pozycji";
                     session.close();
                 }
-
             }
             catch(Exception e){
+                e.printStackTrace();
                 databaseResponse = "Niestety nie udało się dodać filmu do bazy";
             }
         }
@@ -76,26 +91,38 @@ public class AddToDatabaseServlet extends HttpServlet {
 
                 Session session = sessionFactory.openSession();
                 Criteria criteria = session.createCriteria(Series.class);
-                criteria.add(Restrictions.eq("filmwebId", modal.getFilmwebId()));
+                criteria.add(Restrictions.eq("column", column));
+                criteria.add(Restrictions.eq("row", row));
                 criteria.setProjection(Projections.rowCount());
                 count = ((Long)criteria.uniqueResult()).intValue();
-                session.getTransaction().commit();
-                if(count == 0){
-                    Series series = new Series(modal.getFilmwebId(), modal.getOriginalTitle(), modal.getPolishTitle(),
-                            Methods.changeImageSize(modal.getImage_6(), "0"), Methods.changeImageSize(modal.getImage_6(), "1"),
-                            Methods.changeImageSize(modal.getImage_6(), "2"), Methods.changeImageSize(modal.getImage_6(), "3"),
-                            Methods.changeImageSize(modal.getImage_6(), "4"), Methods.changeImageSize(modal.getImage_6(), "5"),
-                            modal.getImage_6(), modal.getYear(), modal.getCast(), modal.getDuration(), modal.getProductionCountry(),
-                            modal.getFilmwebGenre(), Methods.preventNull(description), modal.getPlot(), genre, column, row, country,
-                            modal.getNumberOfEpisodes(), modal.getNumberOfSeasons());
 
-                    Transaction tx = session.beginTransaction();
-                    session.save(series);
-                    tx.commit();
-                    session.close();
+                if(count == 0){
+                    Criteria criteria2 = session.createCriteria(Series.class);
+                    criteria.add(Restrictions.eq("filmwebId", modal.getFilmwebId()));
+                    criteria.setProjection(Projections.rowCount());
+                    count = ((Long)criteria.uniqueResult()).intValue();
+                    if(count == 0){
+                        Series series = new Series(modal.getFilmwebId(), modal.getOriginalTitle(), modal.getPolishTitle(),
+                                Methods.changeImageSize(modal.getImage_6(), "0"), Methods.changeImageSize(modal.getImage_6(), "1"),
+                                Methods.changeImageSize(modal.getImage_6(), "2"), Methods.changeImageSize(modal.getImage_6(), "3"),
+                                Methods.changeImageSize(modal.getImage_6(), "4"), Methods.changeImageSize(modal.getImage_6(), "5"),
+                                modal.getImage_6(), modal.getYear(), modal.getCast(), modal.getDuration(), modal.getProductionCountry(),
+                                modal.getFilmwebGenre(), Methods.preventNull(description), modal.getPlot(), genre, column, row, country,
+                                modal.getNumberOfEpisodes(), modal.getNumberOfSeasons());
+
+                        Transaction tx = session.beginTransaction();
+                        session.save(series);
+                        tx.commit();
+                        session.close();
+                        databaseResponse = "Serial dodano do bazy";
+                    }
+                    else{
+                        databaseResponse = "Niestety taki serial jest już w bazie";
+                        session.close();
+                    }
                 }
                 else{
-                    databaseResponse = "Niestety taki serial jest już w bazie";
+                    databaseResponse = "Niestety jakiś inny serial znaduje się na tej pozycji";
                     session.close();
                 }
             }
