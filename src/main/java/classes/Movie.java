@@ -52,12 +52,11 @@ public class Movie {
         this.setPlot(plot);
     }
 
-    public Movie (int id, Long filmwebId, String originalTitle, String polishTitle,
+    public Movie (Long filmwebId, String originalTitle, String polishTitle,
                   String image_0, String image_1, String image_2, String image_3,
                   String image_4, String image_5, String image_6, String year, String cast,
                   String duration, String productionCountry, String filmwebGenre, String description,
                   String plot, String genre, int column, int row, String countryType){
-        this.setId(id);
         this.setFilmwebId(filmwebId);
         this.setOriginalTitle(originalTitle);
         this.setPolishTitle(polishTitle);

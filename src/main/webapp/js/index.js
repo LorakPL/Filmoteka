@@ -131,11 +131,11 @@ function addMovie(id, title, movieOrSeries) {
                                     "</tr>" +
                                     "<tr>" +
                                         "<td><b>Kolumna:</b></td>" +
-                                        "<td>" + "<input id=\"columnInput\" class=\"modalInput\" type=\"text\" name=\"column\" required />" + "</td>" +
+                                        "<td>" + "<input autocomplete=\"off\" id=\"columnInput\" class=\"modalInput\" type=\"text\" name=\"column\" required />" + "</td>" +
                                     "</tr>" +
                                     "<tr>" +
                                         "<td><b>Rząd:</b></td>" +
-                                        "<td>" + "<input id=\"rowInput\" class=\"modalInput\" type=\"text\" name=\"row\" required />" + "</td>" +
+                                        "<td>" + "<input autocomplete=\"off\" id=\"rowInput\" class=\"modalInput\" type=\"text\" name=\"row\" required />" + "</td>" +
                                     "</tr>" +
                                     "<tr>" +
                                         "<td><b>Gatunek:</b></td>" +

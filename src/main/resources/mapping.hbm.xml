@@ -13,7 +13,7 @@
         </id>
         <property name="filmwebId" column="filmweb_id" type="long"/>
         <property name="originalTitle" column="foreign_title" type="string"/>
-        <property name="polishTitle" column="polish_Title" type="string"/>
+        <property name="polishTitle" column="polish_title" type="string"/>
         <property name="image_0" column="image_0" type="string"/>
         <property name="image_1" column="image_1" type="string"/>
         <property name="image_2" column="image_2" type="string"/>
@@ -43,7 +43,7 @@
         </id>
         <property name="filmwebId" column="filmweb_id" type="long"/>
         <property name="originalTitle" column="foreign_title" type="string"/>
-        <property name="polishTitle" column="polishTitle" type="string"/>
+        <property name="polishTitle" column="polish_title" type="string"/>
         <property name="image_0" column="image_0" type="string"/>
         <property name="image_1" column="image_1" type="string"/>
         <property name="image_2" column="image_2" type="string"/>

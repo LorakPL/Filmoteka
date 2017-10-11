@@ -36,7 +36,8 @@ public class PrepareModal extends HttpServlet {
         info.talacha.filmweb.models.Series seriesInfo = new info.talacha.filmweb.models.Series();
         List<String> descriptionList = null;
         ArrayList<Modal> modal = new ArrayList<Modal>();
-        ArrayList<Modal> modalToSend = new ArrayList<Modal>();
+        //ArrayList<Modal> modalToSend = new ArrayList<Modal>();
+        Modal modalToSend = new Modal();
 
         if(type.equals("Film")) {
             for (FilmSearchResult movie : filmList) {
@@ -51,9 +52,10 @@ public class PrepareModal extends HttpServlet {
                                         movie.getCast(), String.valueOf(Methods.preventNullInteger(movieInfo.getDuration())),
                                         movieInfo.getPlot(), type));
 
-                    modalToSend.add(new Modal(id, polishTitle, movie.getTitle(), movie.getImageURL(), String.valueOf(Methods.preventNullInteger(movie.getYear())),
+
+                    modalToSend = new Modal(id, polishTitle, movie.getTitle(), movie.getImageURL(), String.valueOf(Methods.preventNullInteger(movie.getYear())),
                                             movie.getCast(), String.valueOf(Methods.preventNullInteger(movieInfo.getDuration())), descriptionList,
-                                            movieInfo.getPlot(), type, movieInfo.getCountries(), movieInfo.getGenre()));
+                                            movieInfo.getPlot(), type, movieInfo.getCountries(), movieInfo.getGenre());
                 }
             }
         }
@@ -70,10 +72,16 @@ public class PrepareModal extends HttpServlet {
                                         series.getCast(), String.valueOf(Methods.preventNullInteger(seriesInfo.getDuration())),
                                         seriesInfo.getPlot(), type));
 
+                    modalToSend = new Modal(id, polishTitle, series.getTitle(), series.getImageURL(), String.valueOf(Methods.preventNullInteger(series.getYear())),
+                            series.getCast(), String.valueOf(Methods.preventNullInteger(seriesInfo.getDuration())), descriptionList,
+                            seriesInfo.getPlot(), type, seriesInfo.getCountries(), seriesInfo.getGenre(), String.valueOf(Methods.preventNullInteger(seriesInfo.getEpisodesCount())),
+                            String.valueOf(Methods.preventNullInteger(seriesInfo.getSeasonsCount())));
+                    /*
                     modalToSend.add(new Modal(id, polishTitle, series.getTitle(), series.getImageURL(), String.valueOf(Methods.preventNullInteger(series.getYear())),
                             series.getCast(), String.valueOf(Methods.preventNullInteger(seriesInfo.getDuration())), descriptionList,
                             seriesInfo.getPlot(), type, seriesInfo.getCountries(), seriesInfo.getGenre(), String.valueOf(Methods.preventNullInteger(seriesInfo.getEpisodesCount())),
                             String.valueOf(Methods.preventNullInteger(seriesInfo.getSeasonsCount()))));
+                            */
                 }
             }
         }

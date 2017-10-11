@@ -18,6 +18,8 @@ public class Modal {
     private String numberOfEpisodes;
     private String numberOfSeasons;
 
+    public Modal(){}
+
     public Modal(Long filmwebId, String polishTitle, String originalTitle, String image,
                  String year, String cast, String duration, List<String> descriptionList,
                  String plot, String type, String productionCountry, String filmwebGenre){
