@@ -80,6 +80,35 @@ public class Movie {
         this.setCountryType(countryType);
     }
 
+    public Movie (int id, Long filmwebId, String originalTitle, String polishTitle,
+                  String image_0, String image_1, String image_2, String image_3,
+                  String image_4, String image_5, String image_6, String year, String cast,
+                  String duration, String productionCountry, String filmwebGenre, String description,
+                  String plot, String genre, int column, int row, String countryType){
+        this.setId(id);
+        this.setFilmwebId(filmwebId);
+        this.setOriginalTitle(originalTitle);
+        this.setPolishTitle(polishTitle);
+        this.setImage_0(image_0);
+        this.setImage_1(image_1);
+        this.setImage_2(image_2);
+        this.setImage_3(image_3);
+        this.setImage_4(image_4);
+        this.setImage_5(image_5);
+        this.setImage_6(image_6);
+        this.setYear(year);
+        this.setCast(cast);
+        this.setDuration(duration);
+        this.setPlot(plot);
+        this.setProductionCountry(productionCountry);
+        this.setFilmwebGenre(filmwebGenre);
+        this.setDescription(description);
+        this.setGenre(genre);
+        this.setColumn(column);
+        this.setRow(row);
+        this.setCountryType(countryType);
+    }
+
 
     /*-------- API --------
     ID

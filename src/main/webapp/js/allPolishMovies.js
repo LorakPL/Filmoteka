@@ -1,20 +1,20 @@
 function showAllMovies() {
     $("#tablediv").hide();
-    $.post("AllMoviesServlet", function(responseJson) {
+    $.post("AllPolishMoviesServlet", function(responseJson) {
         $("#movieTable").find("tr:gt(0)").remove();
         var table1 = $("#movieTable");
         var tablebody = $(
             "<thead>" +
-                "<tr>" +
-                    "<th scope=\"col\" onclick=\"sortTable(0)\">Tytuł</th>" +
-                    "<th scope=\"col\">Zdjęcie</th>" +
-                    "<th scope=\"col\" onclick=\"sortTable(2)\">Rok</th>" +
-                    "<th scope=\"col\" onclick=\"sortTable(3)\">Czas trwania</th>" +
-                    "<th scope=\"col\">Obsada</th>" +
-                    "<th scope=\"col\" onclick=\"sortTable(5)\">Kolumna</th>" +
-                    "<th scope=\"col\" onclick=\"sortTable(6)\">Rząd</th>" +
-                    "<th scope=\"col\">Opis</th>" +
-                    "<th scope=\"col\" onclick=\"sortTable(8)\">Gatunek</th>" +
+            "<tr>" +
+            "<th scope=\"col\" onclick=\"sortTable(0)\">Tytuł</th>" +
+            "<th scope=\"col\">Zdjęcie</th>" +
+            "<th scope=\"col\" onclick=\"sortTable(2)\">Rok</th>" +
+            "<th scope=\"col\" onclick=\"sortTable(3)\">Czas trwania</th>" +
+            "<th scope=\"col\">Obsada</th>" +
+            "<th scope=\"col\" onclick=\"sortTable(5)\">Kolumna</th>" +
+            "<th scope=\"col\" onclick=\"sortTable(6)\">Rząd</th>" +
+            "<th scope=\"col\">Opis</th>" +
+            "<th scope=\"col\" onclick=\"sortTable(8)\">Gatunek</th>" +
             "</tr>" +
             "</thead>"
         );

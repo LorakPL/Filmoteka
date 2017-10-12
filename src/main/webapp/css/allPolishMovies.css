@@ -164,39 +164,6 @@ input::-webkit-search-cancel-button {
 
 
 /* ----------- Powiekszanie zdjecia ------------ */
-#thumbwrap {
-    width:300px;
-    height:300px;
-}
-.thumb {
-    float:left; /* must be floated for same cross browser position of larger image */
-    position:relative;
-    margin:3px;
-}
-.thumb img {
-    border:1px solid #000;
-    vertical-align:bottom;
-}
-.thumb:hover {
-    border:0; /* IE6 needs this to show large image */
-    z-index:1;
-}
-.thumb span {
-    position:absolute;
-    visibility:hidden;
-}
-.thumb:hover span {
-    visibility:visible;
-    top:0px;
-    left:0px;
-}
-
-
-
-
-
-
-
 
 
 .style_prevu_kit

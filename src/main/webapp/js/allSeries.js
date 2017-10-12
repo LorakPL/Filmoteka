@@ -1,20 +1,21 @@
-function showAllMovies() {
+function showAllSeries() {
     $("#tablediv").hide();
-    $.post("AllMoviesServlet", function(responseJson) {
-        $("#movieTable").find("tr:gt(0)").remove();
-        var table1 = $("#movieTable");
+    $.post("AllSeriesServlet", function(responseJson) {
+        $("#seriesTable").find("tr:gt(0)").remove();
+        var table1 = $("#seriesTable");
         var tablebody = $(
             "<thead>" +
-                "<tr>" +
-                    "<th scope=\"col\" onclick=\"sortTable(0)\">Tytuł</th>" +
-                    "<th scope=\"col\">Zdjęcie</th>" +
-                    "<th scope=\"col\" onclick=\"sortTable(2)\">Rok</th>" +
-                    "<th scope=\"col\" onclick=\"sortTable(3)\">Czas trwania</th>" +
-                    "<th scope=\"col\">Obsada</th>" +
-                    "<th scope=\"col\" onclick=\"sortTable(5)\">Kolumna</th>" +
-                    "<th scope=\"col\" onclick=\"sortTable(6)\">Rząd</th>" +
-                    "<th scope=\"col\">Opis</th>" +
-                    "<th scope=\"col\" onclick=\"sortTable(8)\">Gatunek</th>" +
+            "<tr>" +
+            "<th scope=\"col\" onclick=\"sortTable(0)\">Tytuł</th>" +
+            "<th scope=\"col\">Zdjęcie</th>" +
+            "<th scope=\"col\" onclick=\"sortTable(2)\">Rok</th>" +
+            "<th scope=\"col\" onclick=\"sortTable(3)\">Czas trwania</th>" +
+            "<th scope=\"col\">Obsada</th>" +
+            "<th scope=\"col\" onclick=\"sortTable(5)\">Kolumna</th>" +
+            "<th scope=\"col\" onclick=\"sortTable(6)\">Rząd</th>" +
+            "<th scope=\"col\">Opis</th>" +
+            "<th scope=\"col\">Liczba odcinków</th>" +
+            "<th scope=\"col\">Liczba sezonów</th>" +
             "</tr>" +
             "</thead>"
         );
@@ -22,7 +23,7 @@ function showAllMovies() {
         var tbody = $("<tbody>");
         tbody.appendTo(table1);
         $.each(responseJson, function(key,value) {
-            var rowNew = $("<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+            var rowNew = $("<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
             var polishTitle = value['polishTitle'];
             var bigImage = value['image_6'];
             var smallImage = value['image_4'];
@@ -40,6 +41,7 @@ function showAllMovies() {
             */
 
             //rowNew.children().eq(0).html("<a class=\"thumb\" href=\"#\"><img src=\"" + String(smallImage) + "\" alt=\"" + String(polishTitle) + "\"><span><img src=\"" + String(bigImage) + "\" alt=\"" + String(polishTitle) + "\"></span></a>");
+
             //rowNew.children().eq(0).text(value['image_4']);
             rowNew.children().eq(0).text(value['polishTitle']);
             rowNew.children().eq(1).html("<img class=\"style_prevu_kit\" src=\"" + String(bigImage) + "\" alt=\"" + String(polishTitle) + "\">");
@@ -49,7 +51,8 @@ function showAllMovies() {
             rowNew.children().eq(5).text(value['column']);
             rowNew.children().eq(6).text(value['row']);
             rowNew.children().eq(7).text(value['plot']);
-            rowNew.children().eq(8).text(value['genre']);
+            rowNew.children().eq(8).text(value['numberOfEpisodes']);
+            rowNew.children().eq(9).text(value['numberOfSeasons']);
             rowNew.appendTo(table1);
         });
         tbody.appendTo(table1);
@@ -61,7 +64,7 @@ function searchInTable() {
     var input, filter, table, tr, td, i;
     input = document.getElementById("myInput");
     filter = input.value.toUpperCase();
-    table = document.getElementById("movieTable");
+    table = document.getElementById("seriesTable");
     tr = table.getElementsByTagName("tr");
     for (i = 0; i < tr.length; i++) {
         td = tr[i].getElementsByTagName("td")[1];
@@ -79,7 +82,7 @@ function searchInTable() {
 
 function sortTable(n) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-    table = document.getElementById("movieTable");
+    table = document.getElementById("seriesTable");
     switching = true;
     //Set the sorting direction to ascending:
     dir = "asc";

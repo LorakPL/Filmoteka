@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/AllMoviesServlet")
-public class AllMoviesServlet extends HttpServlet {
+@WebServlet("/AllPolishMoviesServlet")
+public class AllPolishMoviesServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SessionFactory sessionFactory;
         sessionFactory = new Configuration()
@@ -28,7 +28,7 @@ public class AllMoviesServlet extends HttpServlet {
         Session session = sessionFactory.openSession();
 
         try{
-            List<Movie> movies  = (List<Movie>) session.createQuery("from Movie").list();
+            List<Movie> movies  = (List<Movie>) session.createQuery("from Movie where countryType='Polska'").list();
             session.close();
             Gson gson = new Gson();
             JsonElement element = gson.toJsonTree(movies, new TypeToken<List<Movie>>() {}.getType());
