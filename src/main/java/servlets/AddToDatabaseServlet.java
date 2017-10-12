@@ -33,6 +33,8 @@ public class AddToDatabaseServlet extends HttpServlet {
         String databaseResponse = "";
         int count = 0;
 
+        System.out.println(description);
+
         if(modal.getType().equals("Film")){
             try{
                 SessionFactory sessionFactory;
@@ -98,8 +100,8 @@ public class AddToDatabaseServlet extends HttpServlet {
 
                 if(count == 0){
                     Criteria criteria2 = session.createCriteria(Series.class);
-                    criteria.add(Restrictions.eq("filmwebId", modal.getFilmwebId()));
-                    criteria.setProjection(Projections.rowCount());
+                    criteria2.add(Restrictions.eq("filmwebId", modal.getFilmwebId()));
+                    criteria2.setProjection(Projections.rowCount());
                     count = ((Long)criteria.uniqueResult()).intValue();
                     if(count == 0){
                         Series series = new Series(modal.getFilmwebId(), modal.getOriginalTitle(), modal.getPolishTitle(),

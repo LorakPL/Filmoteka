@@ -1,6 +1,6 @@
 package servlets;
 
-import classes.Series;
+import classes.Movie;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/AllSeriesServlet")
-public class AllSeriesServlet extends HttpServlet {
+@WebServlet("/AllForeignMoviesServlet")
+public class AllForeignMoviesServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SessionFactory sessionFactory;
         sessionFactory = new Configuration()
@@ -28,17 +28,14 @@ public class AllSeriesServlet extends HttpServlet {
         Session session = sessionFactory.openSession();
 
         try{
-            List<Series> series  = (List<Series>) session.createQuery("from Series").list();
+            List<Movie> movies  = (List<Movie>) session.createQuery("from Movie where countryType='Zagraniczny'").list();
             session.close();
             Gson gson = new Gson();
-            JsonElement element = gson.toJsonTree(series, new TypeToken<List<Series>>() {}.getType());
+            JsonElement element = gson.toJsonTree(movies, new TypeToken<List<Movie>>() {}.getType());
             JsonArray jsonArray = element.getAsJsonArray();
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().print(jsonArray);
-            for(Series tmp : series){
-                System.out.println(tmp.getDescription());
-            }
         }
         catch (Exception e){
             e.printStackTrace();

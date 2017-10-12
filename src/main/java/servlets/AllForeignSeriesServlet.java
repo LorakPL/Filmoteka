@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/AllSeriesServlet")
-public class AllSeriesServlet extends HttpServlet {
+@WebServlet("/AllForeignSeriesServlet")
+public class AllForeignSeriesServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SessionFactory sessionFactory;
         sessionFactory = new Configuration()
@@ -28,7 +28,7 @@ public class AllSeriesServlet extends HttpServlet {
         Session session = sessionFactory.openSession();
 
         try{
-            List<Series> series  = (List<Series>) session.createQuery("from Series").list();
+            List<Series> series  = (List<Series>) session.createQuery("from Series where countryType='Zagraniczny'").list();
             session.close();
             Gson gson = new Gson();
             JsonElement element = gson.toJsonTree(series, new TypeToken<List<Series>>() {}.getType());
@@ -36,9 +36,6 @@ public class AllSeriesServlet extends HttpServlet {
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().print(jsonArray);
-            for(Series tmp : series){
-                System.out.println(tmp.getDescription());
-            }
         }
         catch (Exception e){
             e.printStackTrace();

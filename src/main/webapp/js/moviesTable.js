@@ -1,8 +1,8 @@
-function showAllSeries(servlet) {
+function showAllMovies(servlet) {
     $("#tablediv").hide();
     $.post(servlet, function(responseJson) {
-        $("#seriesTable").find("tr:gt(0)").remove();
-        var table1 = $("#seriesTable");
+        $("#movieTable").find("tr:gt(0)").remove();
+        var table1 = $("#movieTable");
         var tablebody = $(
             "<thead>" +
             "<tr>" +
@@ -14,8 +14,7 @@ function showAllSeries(servlet) {
             "<th scope=\"col\" onclick=\"sortTable(5)\">Kolumna</th>" +
             "<th scope=\"col\" onclick=\"sortTable(6)\">Rząd</th>" +
             "<th scope=\"col\">Opis</th>" +
-            "<th scope=\"col\">Liczba odcinków</th>" +
-            "<th scope=\"col\">Liczba sezonów</th>" +
+            "<th scope=\"col\" onclick=\"sortTable(8)\">Gatunek</th>" +
             "</tr>" +
             "</thead>"
         );
@@ -23,26 +22,9 @@ function showAllSeries(servlet) {
         var tbody = $("<tbody>");
         tbody.appendTo(table1);
         $.each(responseJson, function(key,value) {
-            var rowNew = $("<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+            var rowNew = $("<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
             var polishTitle = value['polishTitle'];
             var bigImage = value['image_6'];
-            var smallImage = value['image_4'];
-            /*
-            var smallLink = value['smallPicture'];
-            var bigLink = value['bigPicture'];
-            rowNew.children().eq(0).text(value['id']);
-            rowNew.children().eq(1).text(value['originalTitle']);
-            rowNew.children().eq(2).text(value['polishTitle']);
-            rowNew.children().eq(3).html("<a class=\"thumb\" href=\"#\"><img src=\"" + String(smallLink) + "\" alt=\"\"><span><img src=\"" + String(bigLink) + "\" alt=\"\"></span></a>\n");
-            rowNew.children().eq(4).text(value['productionCountry']);
-            rowNew.children().eq(5).text(value['genre']);
-            rowNew.children().eq(6).text(value['duration']);
-            rowNew.children().eq(7).text(value['productionYear']);
-            */
-
-            //rowNew.children().eq(0).html("<a class=\"thumb\" href=\"#\"><img src=\"" + String(smallImage) + "\" alt=\"" + String(polishTitle) + "\"><span><img src=\"" + String(bigImage) + "\" alt=\"" + String(polishTitle) + "\"></span></a>");
-
-            //rowNew.children().eq(0).text(value['image_4']);
             rowNew.children().eq(0).text(value['polishTitle']);
             rowNew.children().eq(1).html("<img class=\"style_prevu_kit\" src=\"" + String(bigImage) + "\" alt=\"" + String(polishTitle) + "\">");
             rowNew.children().eq(2).text(value['year']);
@@ -51,8 +33,7 @@ function showAllSeries(servlet) {
             rowNew.children().eq(5).text(value['column']);
             rowNew.children().eq(6).text(value['row']);
             rowNew.children().eq(7).text(value['plot']);
-            rowNew.children().eq(8).text(value['numberOfEpisodes']);
-            rowNew.children().eq(9).text(value['numberOfSeasons']);
+            rowNew.children().eq(8).text(value['genre']);
             rowNew.appendTo(table1);
         });
         tbody.appendTo(table1);
@@ -64,7 +45,7 @@ function searchInTable() {
     var input, filter, table, tr, td, i;
     input = document.getElementById("myInput");
     filter = input.value.toUpperCase();
-    table = document.getElementById("seriesTable");
+    table = document.getElementById("movieTable");
     tr = table.getElementsByTagName("tr");
     for (i = 0; i < tr.length; i++) {
         td = tr[i].getElementsByTagName("td")[1];
@@ -78,11 +59,9 @@ function searchInTable() {
     }
 }
 
-
-
 function sortTable(n) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-    table = document.getElementById("seriesTable");
+    table = document.getElementById("movieTable");
     switching = true;
     //Set the sorting direction to ascending:
     dir = "asc";
