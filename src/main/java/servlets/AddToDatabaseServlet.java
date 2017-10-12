@@ -53,7 +53,7 @@ public class AddToDatabaseServlet extends HttpServlet {
                     Criteria criteria2 = session.createCriteria(Movie.class);
                     criteria2.add(Restrictions.eq("filmwebId", modal.getFilmwebId()));
                     criteria2.setProjection(Projections.rowCount());
-                    count = ((Long)criteria.uniqueResult()).intValue();
+                    count = ((Long)criteria2.uniqueResult()).intValue();
                     //session.getTransaction().commit();
                     if(count == 0){
                         Movie movie = new Movie(modal.getFilmwebId(), modal.getOriginalTitle(), modal.getPolishTitle(),
@@ -102,7 +102,7 @@ public class AddToDatabaseServlet extends HttpServlet {
                     Criteria criteria2 = session.createCriteria(Series.class);
                     criteria2.add(Restrictions.eq("filmwebId", modal.getFilmwebId()));
                     criteria2.setProjection(Projections.rowCount());
-                    count = ((Long)criteria.uniqueResult()).intValue();
+                    count = ((Long)criteria2.uniqueResult()).intValue();
                     if(count == 0){
                         Series series = new Series(modal.getFilmwebId(), modal.getOriginalTitle(), modal.getPolishTitle(),
                                 Methods.changeImageSize(modal.getImage_6(), "0"), Methods.changeImageSize(modal.getImage_6(), "1"),

@@ -218,11 +218,20 @@ function checkFormInModal() {
 }
 
 function addToDatabase(column, row, genre, country) {
-    alert(column + "  " + row + "  " + genre + "  " + country);
+    //alert(column + "  " + row + "  " + genre + "  " + country);
 
     var data = [column, row, genre, country];
+    modal.style.display = "none";
+    modal2.style.display = "block";
     $.post("AddToDatabaseServlet", {json:data}, function(responseJson) {
+        if(responseJson == "Serial dodano do bazy" || responseJson == "Film dodano do bazy"){
+            modal2.style.display = "none";
             alert(responseJson);
-            modal.style.display = "none";
+        }
+        else{
+            modal2.style.display = "none";
+            alert(responseJson);
+            modal.style.display = "block";
+        }
     });
 }
