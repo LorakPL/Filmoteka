@@ -36,12 +36,12 @@ public class AllSeriesServlet extends HttpServlet {
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().print(jsonArray);
-            for(Series tmp : series){
-                System.out.println(tmp.getDescription());
-            }
         }
         catch (Exception e){
             e.printStackTrace();
+            response.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
+            response.setCharacterEncoding("UTF-8"); // You want world domination, huh?
+            response.getWriter().write("error");
         }
     }
 

@@ -1,44 +1,49 @@
 function showAllSeries(servlet) {
     $("#tablediv").hide();
     $.post(servlet, function(responseJson) {
-        $("#seriesTable").find("tr:gt(0)").remove();
-        var table1 = $("#seriesTable");
-        var tablebody = $(
-            "<thead>" +
-            "<tr>" +
-            "<th scope=\"col\" onclick=\"sortTable(0)\">Tytuł</th>" +
-            "<th scope=\"col\">Zdjęcie</th>" +
-            "<th scope=\"col\" onclick=\"sortTable(2)\">Rok</th>" +
-            "<th scope=\"col\" onclick=\"sortTable(3)\">Czas trwania</th>" +
-            "<th scope=\"col\">Obsada</th>" +
-            "<th scope=\"col\" onclick=\"sortTable(5)\">Kolumna</th>" +
-            "<th scope=\"col\" onclick=\"sortTable(6)\">Rząd</th>" +
-            "<th scope=\"col\">Opis</th>" +
-            "<th scope=\"col\">Liczba odcinków</th>" +
-            "<th scope=\"col\">Liczba sezonów</th>" +
-            "</tr>" +
-            "</thead>"
-        );
-        tablebody.appendTo(table1);
-        var tbody = $("<tbody>");
-        tbody.appendTo(table1);
-        $.each(responseJson, function(key,value) {
-            var rowNew = $("<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
-            var polishTitle = value['polishTitle'];
-            var bigImage = value['image_6'];
-            rowNew.children().eq(0).text(value['polishTitle']);
-            rowNew.children().eq(1).html("<img class=\"style_prevu_kit\" src=\"" + String(bigImage) + "\" alt=\"" + String(polishTitle) + "\">");
-            rowNew.children().eq(2).text(value['year']);
-            rowNew.children().eq(3).text(value['duration']);
-            rowNew.children().eq(4).text(value['cast']);
-            rowNew.children().eq(5).text(value['column']);
-            rowNew.children().eq(6).text(value['row']);
-            rowNew.children().eq(7).text(value['plot']);
-            rowNew.children().eq(8).text(value['numberOfEpisodes']);
-            rowNew.children().eq(9).text(value['numberOfSeasons']);
-            rowNew.appendTo(table1);
-        });
-        tbody.appendTo(table1);
+        if(responseJson == "error"){
+            alert("Problem połączenia z bazą danych");
+        }
+        else{
+            $("#seriesTable").find("tr:gt(0)").remove();
+            var table1 = $("#seriesTable");
+            var tablebody = $(
+                "<thead>" +
+                "<tr>" +
+                "<th scope=\"col\" onclick=\"sortTable(0)\">Tytuł</th>" +
+                "<th scope=\"col\">Zdjęcie</th>" +
+                "<th scope=\"col\" onclick=\"sortTable(2)\">Rok</th>" +
+                "<th scope=\"col\" onclick=\"sortTable(3)\">Czas trwania</th>" +
+                "<th scope=\"col\">Obsada</th>" +
+                "<th scope=\"col\" onclick=\"sortTable(5)\">Kolumna</th>" +
+                "<th scope=\"col\" onclick=\"sortTable(6)\">Rząd</th>" +
+                "<th scope=\"col\">Opis</th>" +
+                "<th scope=\"col\">Liczba odcinków</th>" +
+                "<th scope=\"col\">Liczba sezonów</th>" +
+                "</tr>" +
+                "</thead>"
+            );
+            tablebody.appendTo(table1);
+            var tbody = $("<tbody>");
+            tbody.appendTo(table1);
+            $.each(responseJson, function(key,value) {
+                var rowNew = $("<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+                var polishTitle = value['polishTitle'];
+                var bigImage = value['image_6'];
+                rowNew.children().eq(0).text(value['polishTitle']);
+                rowNew.children().eq(1).html("<img class=\"style_prevu_kit\" src=\"" + String(bigImage) + "\" alt=\"" + String(polishTitle) + "\">");
+                rowNew.children().eq(2).text(value['year']);
+                rowNew.children().eq(3).text(value['duration']);
+                rowNew.children().eq(4).text(value['cast']);
+                rowNew.children().eq(5).text(value['column']);
+                rowNew.children().eq(6).text(value['row']);
+                rowNew.children().eq(7).text(value['plot']);
+                rowNew.children().eq(8).text(value['numberOfEpisodes']);
+                rowNew.children().eq(9).text(value['numberOfSeasons']);
+                rowNew.appendTo(table1);
+            });
+            tbody.appendTo(table1);
+        }
     });
     $("#tablediv").show();
 }
