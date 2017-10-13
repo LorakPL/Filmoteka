@@ -107,7 +107,7 @@ function addMovie(id, title, movieOrSeries) {
 
             pictureRow.appendTo(modal);
 
-            var tableRow = $("<div class=\"modalTable\">" +
+            var tableRow = $("<div class=\"modalTable\" style=\"overflow-x:auto\">" +
                                 "<table>" +
                                     "<tr>" +
                                         "<td><b>Typ:</b></td>" +
