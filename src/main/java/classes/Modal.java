@@ -186,6 +186,9 @@ public class Modal {
     }
 
     public void setNumberOfSeasons(String numberOfSeasons) {
+        if(numberOfSeasons.equals("0")){
+            numberOfSeasons = "1";
+        }
         this.numberOfSeasons = numberOfSeasons;
     }
 

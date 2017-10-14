@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.RescaleOp;
+import java.io.File;
 import java.io.IOException;
 
 @WebServlet("/AddToDatabaseServlet")
@@ -31,10 +32,96 @@ public class AddToDatabaseServlet extends HttpServlet {
 
         String description = String.join(" ", modal.getDescriptionList());
         String databaseResponse = "";
-        int count = 0;
+        int positionCountMovies = 0;
+        int positionCountSeries = 0;
+        int idCountMovies = 0;
+        int idCountSeries = 0;
 
-        System.out.println(description);
+        try{
+            SessionFactory sessionFactory;
+            sessionFactory = new Configuration()
+                    .configure() // configures settings from hibernate.cfg.xml
+                    .buildSessionFactory();
 
+            Session session = sessionFactory.openSession();
+
+            Criteria criteria = session.createCriteria(Movie.class);
+            criteria.add(Restrictions.eq("filmwebId", modal.getFilmwebId()));
+            criteria.setProjection(Projections.rowCount());
+            idCountMovies = ((Long)criteria.uniqueResult()).intValue();
+
+            Criteria criteria2 = session.createCriteria(Series.class);
+            criteria2.add(Restrictions.eq("filmwebId", modal.getFilmwebId()));
+            criteria2.setProjection(Projections.rowCount());
+            idCountSeries = ((Long)criteria2.uniqueResult()).intValue();
+
+            Criteria criteria3 = session.createCriteria(Movie.class);
+            criteria3.add(Restrictions.eq("column", column));
+            criteria3.add(Restrictions.eq("row", row));
+            criteria3.setProjection(Projections.rowCount());
+            positionCountMovies = ((Long)criteria3.uniqueResult()).intValue();
+
+            Criteria criteria4 = session.createCriteria(Series.class);
+            criteria4.add(Restrictions.eq("column", column));
+            criteria4.add(Restrictions.eq("row", row));
+            criteria4.setProjection(Projections.rowCount());
+            positionCountSeries = ((Long)criteria4.uniqueResult()).intValue();
+
+            if(idCountMovies != 0){
+                databaseResponse = "Niestety taki film jest już w bazie";
+            }
+            else if(idCountSeries != 0){
+                databaseResponse = "Niestety taki serial jest już w bazie";
+            }
+            else if(positionCountMovies != 0 || positionCountSeries != 0){
+                databaseResponse = "Niestety jakaś inna pozycja znajduje się już na tym miejscu";
+            }
+            else{
+                if(modal.getType().equals("Film")){
+                    Movie movie = new Movie(modal.getFilmwebId(), modal.getOriginalTitle(), modal.getPolishTitle(),
+                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "0"), "image_0", modal.getFilmwebId()),
+                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "1"), "image_1", modal.getFilmwebId()),
+                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "2"), "image_2", modal.getFilmwebId()),
+                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "3"), "image_3", modal.getFilmwebId()),
+                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "4"), "image_4", modal.getFilmwebId()),
+                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "5"), "image_5", modal.getFilmwebId()),
+                            Methods.saveImage(modal.getImage_6(), "image_6", modal.getFilmwebId()), modal.getYear(), modal.getCast(),
+                            modal.getDuration(), modal.getProductionCountry(), modal.getFilmwebGenre(), Methods.preventNull(description),
+                            modal.getPlot(), genre, column, row, country);
+
+                    Transaction tx = session.beginTransaction();
+                    session.save(movie);
+                    tx.commit();
+                    session.close();
+                    databaseResponse = "Film dodano do bazy";
+                }
+                else if(modal.getType().equals("Serial")){
+                    Series series = new Series(modal.getFilmwebId(), modal.getOriginalTitle(), modal.getPolishTitle(),
+                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "0"), "image_0", modal.getFilmwebId()),
+                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "1"), "image_1", modal.getFilmwebId()),
+                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "2"), "image_2", modal.getFilmwebId()),
+                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "3"), "image_3", modal.getFilmwebId()),
+                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "4"), "image_4", modal.getFilmwebId()),
+                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "5"), "image_5", modal.getFilmwebId()),
+                            Methods.saveImage(modal.getImage_6(), "image_6", modal.getFilmwebId()), modal.getYear(), modal.getCast(), modal.getDuration(), modal.getProductionCountry(),
+                            modal.getFilmwebGenre(), Methods.preventNull(description), modal.getPlot(), genre, column, row, country,
+                            modal.getNumberOfEpisodes(), modal.getNumberOfSeasons());
+
+                    Transaction tx = session.beginTransaction();
+                    session.save(series);
+                    tx.commit();
+                    session.close();
+                    databaseResponse = "Serial dodano do bazy";
+                }
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            databaseResponse = "Niestety nie udało się dodać do bazy";
+        }
+
+
+        /*
         if(modal.getType().equals("Film")){
             try{
                 SessionFactory sessionFactory;
@@ -44,14 +131,14 @@ public class AddToDatabaseServlet extends HttpServlet {
 
                 Session session = sessionFactory.openSession();
                 Criteria criteria = session.createCriteria(Movie.class);
-                criteria.add(Restrictions.eq("column", column));
-                criteria.add(Restrictions.eq("row", row));
+                criteria.add(Restrictions.eq("filmwebId", modal.getFilmwebId()));
                 criteria.setProjection(Projections.rowCount());
                 count = ((Long)criteria.uniqueResult()).intValue();
 
                 if(count == 0){
                     Criteria criteria2 = session.createCriteria(Movie.class);
-                    criteria2.add(Restrictions.eq("filmwebId", modal.getFilmwebId()));
+                    criteria2.add(Restrictions.eq("column", column));
+                    criteria2.add(Restrictions.eq("row", row));
                     criteria2.setProjection(Projections.rowCount());
                     count = ((Long)criteria2.uniqueResult()).intValue();
                     //session.getTransaction().commit();
@@ -70,12 +157,12 @@ public class AddToDatabaseServlet extends HttpServlet {
                         databaseResponse = "Film dodano do bazy";
                     }
                     else{
-                        databaseResponse = "Niestety taki film jest już w bazie";
+                        databaseResponse = "Niestety jakiś inny film znajduje się na tej pozycji";
                         session.close();
                     }
                 }
                 else{
-                    databaseResponse = "Niestety jakiś inny film znaduje się na tej pozycji";
+                    databaseResponse = "Niestety taki film jest już w bazie";
                     session.close();
                 }
             }
@@ -93,14 +180,14 @@ public class AddToDatabaseServlet extends HttpServlet {
 
                 Session session = sessionFactory.openSession();
                 Criteria criteria = session.createCriteria(Series.class);
-                criteria.add(Restrictions.eq("column", column));
-                criteria.add(Restrictions.eq("row", row));
+                criteria.add(Restrictions.eq("filmwebId", modal.getFilmwebId()));
                 criteria.setProjection(Projections.rowCount());
                 count = ((Long)criteria.uniqueResult()).intValue();
 
                 if(count == 0){
                     Criteria criteria2 = session.createCriteria(Series.class);
-                    criteria2.add(Restrictions.eq("filmwebId", modal.getFilmwebId()));
+                    criteria2.add(Restrictions.eq("column", column));
+                    criteria2.add(Restrictions.eq("row", row));
                     criteria2.setProjection(Projections.rowCount());
                     count = ((Long)criteria2.uniqueResult()).intValue();
                     if(count == 0){
@@ -119,12 +206,12 @@ public class AddToDatabaseServlet extends HttpServlet {
                         databaseResponse = "Serial dodano do bazy";
                     }
                     else{
-                        databaseResponse = "Niestety taki serial jest już w bazie";
+                        databaseResponse = "Niestety jakiś inny serial znajduje się na tej pozycji";
                         session.close();
                     }
                 }
                 else{
-                    databaseResponse = "Niestety jakiś inny serial znaduje się na tej pozycji";
+                    databaseResponse = "Niestety taki serial jest już w bazie";
                     session.close();
                 }
             }
@@ -133,7 +220,7 @@ public class AddToDatabaseServlet extends HttpServlet {
             }
         }
 
-
+        */
 
 
 

@@ -26,6 +26,7 @@ function showAllMovies(servlet) {
             var tbody = $("<tbody>");
             tbody.appendTo(table1);
             $.each(responseJson, function(key,value) {
+                alert(value['image_6']);
                 var rowNew = $("<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
                 var polishTitle = value['polishTitle'];
                 var bigImage = value['image_6'];
