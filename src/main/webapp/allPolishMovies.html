@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
     <meta http-equiv="content-type" content="text/html" charset="utf-8" />
     <meta name="viewport" content="width=device-width" initial-scale="1.0" />
-    <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/moviesTable.css"/>
+    <link rel="stylesheet" href="css/biggerPicture.css"/>
+    <link rel="stylesheet" href="css/searchButton.css"/>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="js/moviesTable.js"></script>
     <title>Filmoteka</title>
 </head>
-
-<body>
+<body onload="showAllMovies('AllPolishMoviesServlet')">
 <div class="topnav" id="myTopnav">
     <a href="index.html">Dodaj</a>
     <a href="allMovies.html">Filmy</a>
@@ -23,33 +24,13 @@
 </div>
 
 <div id="wrapper">
-    <div class="content2">
-        <input type="text" placeholder="Szukaj" id="searchBox" autocomplete="off">
+    <div class="content2" id="tablediv" style="overflow-x:auto; text-align: center"> <!-- dzieki style="overflow-x:auto;" na mniejszych ekranach tabele mozna przesuwac -->
+        <form id="myInputDiv">
+            <input type="text" id="myInput" onkeyup="searchInTable()">
+        </form>
+        <table cellspacing="0" id="movieTable">
+        </table>
     </div>
-    <div class="content2" id="galleryDiv">
-    </div>
-
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
-
-        <!-- Modal content -->
-        <div class="modal-content" id="modalDiv">
-            <span class="close">&times;</span>
-        </div>
-
-    </div>
-
-    <!-- The Modal -->
-    <div id="myModal2" class="modal">
-
-        <!-- Modal content -->
-        <div class="modal-content2" id="modalDiv2">
-            <img id="loading_circle" src="img/loading_circle.gif" alt="loading">
-        </div>
-
-    </div>
-
 </div>
 </body>
-<script src="js/index.js"></script>
 </html>

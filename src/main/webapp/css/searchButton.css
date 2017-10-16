@@ -1,0 +1,66 @@
+#myInput {
+    outline: none;
+}
+#myInput {
+    -webkit-appearance: textfield;
+    -webkit-box-sizing: content-box;
+    font-family: inherit;
+    font-size: 100%;
+    background: #ededed url(/img/search-icon.png) no-repeat 9px center;
+    border: solid 1px #ccc;
+    padding: 9px 10px 9px 32px;
+    width: 55px;
+
+    -webkit-border-radius: 10em;
+    -moz-border-radius: 10em;
+    border-radius: 10em;
+
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    transition: all .5s;
+}
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button {
+    display: none;
+}
+
+#myInput:focus {
+    width: 250px;
+    background-color: #fff;
+    border-color: #66CC75;
+
+    -webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
+    -moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
+    box-shadow: 0 0 5px rgba(109,207,246,.5);
+}
+
+
+#myInput:-moz-placeholder {
+    color: #999;
+}
+#myInput::-webkit-input-placeholder {
+    color: #999;
+}
+
+#myInputDiv input[type=text] {
+    width: 15px;
+    padding-left: 10px;
+    color: transparent;
+    cursor: pointer;
+}
+#myInputDiv input[type=text]:hover {
+    background-color: #fff;
+}
+#myInputDiv input[type=text]:focus {
+    width: 250px;
+    padding-left: 32px;
+    color: #000;
+    background-color: #fff;
+    cursor: auto;
+}
+#myInputDiv input:-moz-placeholder {
+    color: transparent;
+}
+#myInputDiv input::-webkit-input-placeholder {
+    color: transparent;
+}
