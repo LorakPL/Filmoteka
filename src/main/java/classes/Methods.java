@@ -39,13 +39,12 @@ public class Methods {
     public static String saveImage(String imgPath, String finalPath, Long filmwebId){ //finalPath np.: image_0, image_1 itp.
         String path = "";
         try{
-            String home = System.getProperty("user.home");
-            new File(home + "/Documents/Filmoteka/src/main/webapp/img/" + finalPath).mkdir();
+            new File(finalPath).mkdirs();
             URL url = new URL(imgPath);
             BufferedImage img = ImageIO.read(url);
-            File file = new File(home + "/Documents/Filmoteka/src/main/webapp/img/" + finalPath + "/" + Long.toString(filmwebId) + ".jpg");
+            File file = new File(finalPath + "/" + Long.toString(filmwebId) + ".jpg");
             ImageIO.write(img, "jpg", file);
-            path = "img/" + finalPath + "/" + Long.toString(filmwebId) + ".jpg";
+            path = "images/img/image_" + finalPath.substring(finalPath.length() - 1) + "/" + Long.toString(filmwebId) + ".jpg";
             /*
             String home = System.getProperty("user.home");
             new File(home + "/Documents/FilmotekaImages/" + finalPath).mkdirs();

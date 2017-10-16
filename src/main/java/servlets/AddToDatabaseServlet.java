@@ -77,15 +77,24 @@ public class AddToDatabaseServlet extends HttpServlet {
                 databaseResponse = "Niestety jakaś inna pozycja znajduje się już na tym miejscu";
             }
             else{
+                String relativeWebPath = "/images";
+                String home = getServletContext().getRealPath(relativeWebPath) + "/img/";
                 if(modal.getType().equals("Film")){
                     Movie movie = new Movie(modal.getFilmwebId(), modal.getOriginalTitle(), modal.getPolishTitle(),
-                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "0"), "image_0", modal.getFilmwebId()),
-                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "1"), "image_1", modal.getFilmwebId()),
-                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "2"), "image_2", modal.getFilmwebId()),
-                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "3"), "image_3", modal.getFilmwebId()),
-                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "4"), "image_4", modal.getFilmwebId()),
-                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "5"), "image_5", modal.getFilmwebId()),
-                            Methods.saveImage(modal.getImage_6(), "image_6", modal.getFilmwebId()), modal.getYear(), modal.getCast(),
+                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "0"),
+                                    home + "image_0", modal.getFilmwebId()),
+                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "1"),
+                                    home + "image_1", modal.getFilmwebId()),
+                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "2"),
+                                    home + "image_2", modal.getFilmwebId()),
+                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "3"),
+                                    home + "image_3", modal.getFilmwebId()),
+                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "4"),
+                                    home + "image_4", modal.getFilmwebId()),
+                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "5"),
+                                    home + "image_5", modal.getFilmwebId()),
+                            Methods.saveImage(modal.getImage_6(),
+                                    home + "image_6", modal.getFilmwebId()), modal.getYear(), modal.getCast(),
                             modal.getDuration(), modal.getProductionCountry(), modal.getFilmwebGenre(), Methods.preventNull(description),
                             modal.getPlot(), genre, column, row, country);
 
@@ -97,13 +106,20 @@ public class AddToDatabaseServlet extends HttpServlet {
                 }
                 else if(modal.getType().equals("Serial")){
                     Series series = new Series(modal.getFilmwebId(), modal.getOriginalTitle(), modal.getPolishTitle(),
-                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "0"), "image_0", modal.getFilmwebId()),
-                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "1"), "image_1", modal.getFilmwebId()),
-                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "2"), "image_2", modal.getFilmwebId()),
-                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "3"), "image_3", modal.getFilmwebId()),
-                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "4"), "image_4", modal.getFilmwebId()),
-                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "5"), "image_5", modal.getFilmwebId()),
-                            Methods.saveImage(modal.getImage_6(), "image_6", modal.getFilmwebId()), modal.getYear(), modal.getCast(), modal.getDuration(), modal.getProductionCountry(),
+                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "0"),
+                                    home + "image_0", modal.getFilmwebId()),
+                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "1"),
+                                    home + "image_1", modal.getFilmwebId()),
+                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "2"),
+                                    home + "image_2", modal.getFilmwebId()),
+                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "3"),
+                                    home + "image_3", modal.getFilmwebId()),
+                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "4"),
+                                    home + "image_4", modal.getFilmwebId()),
+                            Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "5"),
+                                    home + "image_5", modal.getFilmwebId()),
+                            Methods.saveImage(modal.getImage_6(),
+                                    home + "image_6", modal.getFilmwebId()), modal.getYear(), modal.getCast(), modal.getDuration(), modal.getProductionCountry(),
                             modal.getFilmwebGenre(), Methods.preventNull(description), modal.getPlot(), genre, column, row, country,
                             modal.getNumberOfEpisodes(), modal.getNumberOfSeasons());
 
