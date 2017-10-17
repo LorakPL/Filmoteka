@@ -15,7 +15,7 @@ function showAllSeries(servlet) {
                 "<th scope=\"col\" onclick=\"sortTable(2)\">Rok</th>" +
                 "<th scope=\"col\" onclick=\"sortTable(3)\">Czas trwania</th>" +
                 "<th scope=\"col\">Obsada</th>" +
-                "<th scope=\"col\" onclick=\"sortTable(5)\">Kolumna</th>" +
+                "<th scope=\"col\" onclick=\"sortTable(5)\">Regał</th>" +
                 "<th scope=\"col\" onclick=\"sortTable(6)\">Rząd</th>" +
                 "<th scope=\"col\">Opis</th>" +
                 "<th scope=\"col\">Liczba odcinków</th>" +

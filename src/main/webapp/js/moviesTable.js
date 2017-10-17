@@ -15,7 +15,7 @@ function showAllMovies(servlet) {
                 "<th scope=\"col\" onclick=\"sortTable(2)\">Rok</th>" +
                 "<th scope=\"col\" onclick=\"sortTable(3)\">Czas trwania</th>" +
                 "<th scope=\"col\">Obsada</th>" +
-                "<th scope=\"col\" onclick=\"sortTable(5)\">Kolumna</th>" +
+                "<th scope=\"col\" onclick=\"sortTable(5)\">Regał</th>" +
                 "<th scope=\"col\" onclick=\"sortTable(6)\">Rząd</th>" +
                 "<th scope=\"col\">Opis</th>" +
                 "<th scope=\"col\" onclick=\"sortTable(8)\">Gatunek</th>" +
@@ -26,7 +26,6 @@ function showAllMovies(servlet) {
             var tbody = $("<tbody>");
             tbody.appendTo(table1);
             $.each(responseJson, function(key,value) {
-                alert(value['image_6']);
                 var rowNew = $("<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
                 var polishTitle = value['polishTitle'];
                 var bigImage = value['image_6'];

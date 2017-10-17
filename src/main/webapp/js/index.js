@@ -130,7 +130,7 @@ function addMovie(id, title, movieOrSeries) {
                                         "<td>" + String(plot) + "</td>" +
                                     "</tr>" +
                                     "<tr>" +
-                                        "<td><b>Kolumna:</b></td>" +
+                                        "<td><b>Regał:</b></td>" +
                                         "<td>" + "<input autocomplete=\"off\" id=\"columnInput\" class=\"modalInput\" type=\"text\" name=\"column\" required />" + "</td>" +
                                     "</tr>" +
                                     "<tr>" +
