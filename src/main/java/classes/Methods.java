@@ -44,20 +44,7 @@ public class Methods {
             BufferedImage img = ImageIO.read(url);
             File file = new File(finalPath + "/" + Long.toString(filmwebId) + ".jpg");
             ImageIO.write(img, "jpg", file);
-            path = "images/img/image_" + finalPath.substring(finalPath.length() - 1) + "/" + Long.toString(filmwebId) + ".jpg";
-            /*
-            String home = System.getProperty("user.home");
-            new File(home + "/Documents/FilmotekaImages/" + finalPath).mkdirs();
-            URL url = new URL(imgPath);
-            BufferedImage img = ImageIO.read(url);
-            //File file = new File("D:\\image\\downloaded.jpg");
-            File file = new File(home + "/Documents/FilmotekaImages/" + finalPath + "/" + Long.toString(filmwebId) + ".jpg");
-            ImageIO.write(img, "jpg", file);
-
-            //new File(home + "/Downloads/Folder").mkdir();
-            //new File(home + "/Downloads/Folder2/Zaglebienie/Zaglebienie2").mkdirs();
-            path = home + "/Documents/FilmotekaImages/" + finalPath + "/" + Long.toString(filmwebId) + ".jpg";
-            */
+            path = "images/image_" + finalPath.substring(finalPath.length() - 1) + "/" + Long.toString(filmwebId) + ".jpg";
         }
         catch (IOException e){
             e.printStackTrace();

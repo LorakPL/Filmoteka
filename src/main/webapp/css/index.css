@@ -1,4 +1,4 @@
-/* --------------- Wyszukiwanie --------------- */
+/* ---------- Search label ---------- */
 
 #searchBox {
     -webkit-border-radius: 50px;
@@ -44,16 +44,7 @@
 }
 
 
-/* --------------- Galeria --------------- */
-/*
-div.gallery {
-    border: 1px solid #ccc;
-}
-
-div.gallery:hover {
-    border: 1px solid #777;
-}
-*/
+/* ---------- Gallery ---------- */
 
 div.gallery {
     border: 1px solid transparent;
@@ -104,9 +95,10 @@ div.desc {
     clear: both;
 }
 
-/* --------------- Modal --------------- */
+/* ---------- Modal ---------- */
 
-/* The Modal (background) */
+/* ---- Modal background ---- */
+
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -121,28 +113,30 @@ div.desc {
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-/* Modal Content */
+/* ---- Modal content ---- */
+
 .modal-content {
-    /* background-color: #fefefe; */
     background-color: rgba(255, 255, 255, 0.9);
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 70%;
-    overflow: hidden; /* Dzieki temu tlo diva rozszerza sie automatycznie */
+    overflow: hidden; /* responsive div background */
 }
 
-.modal-content2 { /* Tlo ladowania*/
+/* ---- Loading circle background ---- */
+
+.modal-content2 {
     background-color: transparent;
     margin: auto;
     padding: 20px;
     width: 70%;
-    overflow: hidden; /* Dzieki temu tlo diva rozszerza sie automatycznie */
+    overflow: hidden; /* responsive div background */
 }
 
-/* The Close Button */
+/* ---- Close button ---- */
+
 .close {
-    /* color: #aaaaaa; */
     color: red;
     float: right;
     font-size: 28px;
@@ -156,7 +150,7 @@ div.desc {
     cursor: pointer;
 }
 
-/* --------------- Tabela w modalu --------------- */
+/* ---------- Table in modal ---------- */
 
 .modalTable {
     padding: 6px;
@@ -176,7 +170,7 @@ th, td {
 
 tr:hover{background-color:#f5f5f5}
 
-/* ----------- Obrazek ladowania ------------ */
+/* ---------- Loading circle picture ---------- */
 
 #loading_circle{
     width: 20%;
@@ -185,7 +179,7 @@ tr:hover{background-color:#f5f5f5}
     display:block;
 }
 
-/* ----------- Formularz w modalu ----------- */
+/* ---------- Form in modal ---------- */
 
 .modalSelect{
     padding: 16px 20px;
@@ -208,7 +202,7 @@ tr:hover{background-color:#f5f5f5}
     border: 2px solid #555;
 }
 
-/* ------------- Przycisk w modalu ------------- */
+/* ---------- Button in modal ---------- */
 
 .button {
     background-color: #4CAF50; /* Green */

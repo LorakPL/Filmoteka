@@ -12,13 +12,13 @@ $(document).ready(function() {
     $("#searchBox").keyup(function () {
         var myNode = document.getElementById("galleryDiv");
         while (myNode.firstChild) {
-            myNode.removeChild(myNode.firstChild); // ---------- Czyszczenie diva zawierajacego galerie
+            myNode.removeChild(myNode.firstChild); // ---------- clear div with gallery
         }
         var title = document.getElementById("searchBox").value;
         var data = [title];
         $.post("IndexServlet", {json:data}, function(responseJson) {
             while (myNode.firstChild) {
-                myNode.removeChild(myNode.firstChild); // ---------- Czyszczenie diva zawierajacego galerie
+                myNode.removeChild(myNode.firstChild); // ---------- clear div with gallery
             }
             var galery = $("#galleryDiv");
             var clearfix = $("<div class=\"clearfix\"></div>\n");
@@ -36,7 +36,7 @@ $(document).ready(function() {
                                 "</div>");
                 rowNew2.appendTo(galery);
             });
-            clearfix.appendTo(galery); // ---------- Dzieki temu napisy przechodza do nowej lini, a nie powstaja kolo obrazow
+            clearfix.appendTo(galery); // ---------- new line for text, without this text will be next to the photo
         });
         $("#galleryDiv").show();
     });
@@ -47,24 +47,6 @@ $(document).ready(function() {
 // Get the modal
 var modal = document.getElementById('myModal');
 var modal2 = document.getElementById('myModal2');
-
-/*
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal
-btn.onclick = function() {
-    modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
-*/
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
@@ -77,12 +59,12 @@ window.onclick = function(event) {
 function addMovie(id, title, movieOrSeries) {
     var myNode = document.getElementById("modalDiv");
     while (myNode.firstChild) {
-        myNode.removeChild(myNode.firstChild); // ---------- Czyszczenie diva zawierajacego modal
+        myNode.removeChild(myNode.firstChild); // ---------- clear div with modal
     }
     var data = [id, title, movieOrSeries];
     $.post("PrepareModal", {json:data}, function(responseJson) {
         while (myNode.firstChild) {
-            myNode.removeChild(myNode.firstChild); // ---------- Czyszczenie diva zawierajacego modal
+            myNode.removeChild(myNode.firstChild); // ---------- clear div with modal
         }
         var modal = $("#modalDiv");
         $.each(responseJson, function(key,value) {
@@ -160,40 +142,11 @@ function addMovie(id, title, movieOrSeries) {
                                 "<button class=\"button button2\" onclick=\"checkFormInModal()\">Dodaj</button>" +
                             "</div>");
 
-            /*
-
-            var formRow = $("<div class=\"modalForm\">" +
-                                "<form id=\"modalForm\">" +
-                                    "<div class=\"field-container\">" +
-                                        "<input type=\"text\" class=\"field\" required placeholder=\"First name\"/>" +
-                                        "<label class=\"floating-label\">First name</label>" +
-                                    "</div>" +
-                                    "<div class=\"field-container\">" +
-                                        "<input type=\"text\" class=\"field\" required placeholder=\"Last name\"/>" +
-                                        "<label class=\"floating-label\">Last name</label>" +
-                                    "</div>" +
-                                    "<div class=\"field-container\">" +
-                                        "<select class=\"field\" placeholder=\"Options\">" +
-                                            "<option></option>" +
-                                            "<option>option 1</option>" +
-                                            "<option>option 2</option>" +
-                                        "</select>" +
-                                        "<label class=\"floating-label\">Options</label>" +
-                                    "</div>" +
-                                "</form>" +
-                            "</div>");
-
-                            */
-
-            tableRow.appendTo(modal);
-            //formRow.appendTo(modal);
-            //alert(id + " " + cast + " " + title + " " + polishTitle + " " + year + " " + bigPicture + " " + smallPicture + " " + type);
+            tableRow.appendTo(modal)
         });
     });
         setTimeout(function(){ loading() }, 1500);
-        //alert("Wrocilo");
     modal2.style.display = "block";
-    //modal.style.display = "block";
 }
 
 function loading() {
@@ -218,8 +171,6 @@ function checkFormInModal() {
 }
 
 function addToDatabase(column, row, genre, country) {
-    //alert(column + "  " + row + "  " + genre + "  " + country);
-
     var data = [column, row, genre, country];
     modal.style.display = "none";
     modal2.style.display = "block";

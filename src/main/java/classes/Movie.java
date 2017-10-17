@@ -1,9 +1,7 @@
 package classes;
 
-import java.util.List;
-
 public class Movie {
-    private int id; //ogarnac jak to jest zrobione w IDF, bo tu ma byc autoIncrement
+    private int id;
     private Long filmwebId;
     private String originalTitle;
     private String polishTitle;
@@ -27,30 +25,6 @@ public class Movie {
     private String countryType; //Polish or foreign
 
     public Movie(){}
-
-    public Movie (int id, Long filmwebId, String originalTitle, String polishTitle,
-                  String image_0, String image_1, String image_2, String image_3,
-                  String image_4, String image_5, String image_6, String year, String cast, String duration,
-                  String productionCountry, String filmwebGenre, String description, String plot){
-        this.setId(id);
-        this.setFilmwebId(filmwebId);
-        this.setOriginalTitle(originalTitle);
-        this.setPolishTitle(polishTitle);
-        this.setImage_0(image_0);
-        this.setImage_1(image_1);
-        this.setImage_2(image_2);
-        this.setImage_3(image_3);
-        this.setImage_4(image_4);
-        this.setImage_5(image_5);
-        this.setImage_6(image_6);
-        this.setYear(year);
-        this.setCast(cast);
-        this.setDuration(duration);
-        this.setProductionCountry(productionCountry);
-        this.setFilmwebGenre(filmwebGenre);
-        this.setDescription(description);
-        this.setPlot(plot);
-    }
 
     public Movie (Long filmwebId, String originalTitle, String polishTitle,
                   String image_0, String image_1, String image_2, String image_3,
@@ -108,30 +82,6 @@ public class Movie {
         this.setRow(row);
         this.setCountryType(countryType);
     }
-
-
-    /*-------- API --------
-    ID
-    Angielski tytuł
-    Polski tytuł
-    Zdjecie 0-6
-    Rok produkcji
-    Obsada
-
-
-    Czas trwania
-    Kraje produkcji
-    Gatunek
-    Krótki opis
-    */
-
-    /*-------- Informacje od Ojca --------
-
-    Gatunek ???????
-    Regał/Rząd
-    Kraj produkcji ????????
-
-    */
 
     public void setId(int id){
         this.id = id;
@@ -268,16 +218,6 @@ public class Movie {
     public String getDescription() {
         return this.description;
     }
-
-    /*
-    public void setDescription(String description){
-        this.description = description;
-    }
-
-    public String getDescription(){
-        return description;
-    }
-    */
 
     public void setPlot(String plot){
         this.plot = plot;

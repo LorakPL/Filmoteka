@@ -1,3 +1,5 @@
+/* ---------- Responsive search button in movies and series sites ---------- */
+
 #myInput {
     outline: none;
 }
@@ -6,7 +8,7 @@
     -webkit-box-sizing: content-box;
     font-family: inherit;
     font-size: 100%;
-    background: #ededed url(/img/search-icon.png) no-repeat 9px center;
+    background: #ededed url('../img/search-icon.png') no-repeat 9px center;
     border: solid 1px #ccc;
     padding: 9px 10px 9px 32px;
     width: 55px;

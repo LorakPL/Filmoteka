@@ -1,36 +1,8 @@
 package classes;
 
-import java.util.List;
-
 public class Series {
-    /*-------- API --------
-    ID
-    Angielski tytuł
-    Polski tytuł
-    Zdjecie 0-6
-    Rok produkcji
-    Obsada
 
-
-
-    Liczba sezonow
-    Liczba odcinkow
-    Czas trwania
-    Kraje produkcji
-
-    Gatunek
-    Krótki opis
-    */
-
-    /*-------- Informacje od Ojca --------
-
-    Gatunek ???????
-    Regał/Rząd
-    Kraj produkcji ????????
-
-    */
-
-    private int id; //ogarnac jak to jest zrobione w IDF, bo tu ma byc autoIncrement
+    private int id;
     private Long filmwebId;
     private String originalTitle;
     private String polishTitle;
@@ -56,33 +28,6 @@ public class Series {
     private String numberOfSeasons;
 
     public Series(){}
-
-    public Series (int id, Long filmwebId, String originalTitle, String polishTitle,
-                   String image_0, String image_1, String image_2, String image_3,
-                   String image_4, String image_5, String image_6, String year, String cast,
-                   String duration, String productionCountry, String filmwebGenre, String description,
-                   String plot, String numberOfEpisodes, String numberOfSeasons){
-        this.setId(id);
-        this.setFilmwebId(filmwebId);
-        this.setOriginalTitle(originalTitle);
-        this.setPolishTitle(polishTitle);
-        this.setImage_0(image_0);
-        this.setImage_1(image_1);
-        this.setImage_2(image_2);
-        this.setImage_3(image_3);
-        this.setImage_4(image_4);
-        this.setImage_5(image_5);
-        this.setImage_6(image_6);
-        this.setYear(year);
-        this.setCast(cast);
-        this.setDuration(duration);
-        this.setProductionCountry(productionCountry);
-        this.setFilmwebGenre(filmwebGenre);
-        this.setDescription(description);
-        this.setPlot(plot);
-        this.setNumberOfEpisodes(numberOfEpisodes);
-        this.setNumberOfSeasons(numberOfSeasons);
-    }
 
     public Series (Long filmwebId, String originalTitle, String polishTitle,
                   String image_0, String image_1, String image_2, String image_3,

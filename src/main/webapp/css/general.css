@@ -1,16 +1,6 @@
-/* --------------- Ogolne --------------- */
+/* ---------- General ---------- */
+
 * {margin:0px; padding: 0px;}
-/*
-body { font: 16px Verdana; line-height:1.6; background-image: url(http://www.52dazhew.com/data/out/120/586452068-hd-stars-wallpaper.jpg) ;
-    background-position: center center;
-    background-repeat:  no-repeat;
-    background-attachment: fixed;
-    background-size:  cover;
-    background-color: #999;}
-*/
-/*
-body { font: 16px Verdana; line-height:1.6;background-color:  #999;}
-*/
 
 body { font: 16px Verdana; line-height:1.6; background-image: url('../img/night_sky.jpg');
     background-position: center center;
@@ -22,11 +12,13 @@ body { font: 16px Verdana; line-height:1.6; background-image: url('../img/night_
 #wrapper { width:90%; overflow:hidden; margin: 0 auto; }
 a {color: #354458;}
 
-/* --------------- Divy na tresc --------------- */
+/* ---------- Divs for content ---------- */
+
 .content { width:98%; background: rgba(195, 195, 195, 0.8); float:left; padding:1%; overflow:hidden; margin-bottom: 10px; margin-top: 10px}
 .content2 { width:98%; background: transparent; float:left; padding:1%; overflow:hidden; margin-bottom: 10px; margin-top: 10px}
 
-/* --------------- Menu --------------- */
+/* ---------- Menu ---------- */
+
 .topnav {
     overflow: hidden;
     background-color: #333;
