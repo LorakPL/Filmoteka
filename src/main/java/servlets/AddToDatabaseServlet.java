@@ -57,7 +57,7 @@ public class AddToDatabaseServlet extends HttpServlet {
             }
             else{
                 String relativeWebPath = "/images";
-                String home = getServletContext().getRealPath(relativeWebPath) + "/img/";
+                String home = getServletContext().getRealPath(relativeWebPath) + "/";
                 if(modal.getType().equals("Film")){
                     Movie movie = new Movie(modal.getFilmwebId(), modal.getOriginalTitle(), modal.getPolishTitle(),
                             Methods.saveImage(Methods.changeImageSize(modal.getImage_6(), "0"),
