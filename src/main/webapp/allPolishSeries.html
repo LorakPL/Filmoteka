@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="css/biggerPicture.css"/>
     <link rel="stylesheet" href="css/searchButton.css"/>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="js/seriesTable.js"></script>
     <title>Filmoteka</title>
 </head>
 <body onload="showAllSeries('AllPolishSeriesServlet')">
@@ -31,6 +30,15 @@
         <table cellspacing="0" id="seriesTable">
         </table>
     </div>
+
+    <!-- The Modal -->
+    <div id="myModal2" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content2" id="modalDiv2">
+            <img id="loading_picture" src="img/loading_horizontally.gif" alt="loading">
+        </div>
+    </div>
 </div>
 </body>
+<script src="js/seriesTable.js"></script>
 </html>

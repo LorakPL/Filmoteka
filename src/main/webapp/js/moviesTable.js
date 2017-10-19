@@ -1,5 +1,8 @@
+var modal2 = document.getElementById('myModal2');
+
 function showAllMovies(servlet) {
     $("#tablediv").hide();
+    modal2.style.display = "block";
     $.post(servlet, function(responseJson) {
         if(responseJson == "error"){
             alert("Problem połączenia z bazą danych");
@@ -42,6 +45,7 @@ function showAllMovies(servlet) {
             });
             tbody.appendTo(table1);
         }
+        modal2.style.display = "none";
     });
     $("#tablediv").show();
 }
