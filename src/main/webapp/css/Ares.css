@@ -1,0 +1,76 @@
+#Ares{
+    margin:0px auto;
+    width: auto;
+    height: auto;
+    max-height: 50%;
+    max-width: 50%;
+    display:block;
+    -webkit-animation-name: AresMove; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+    -webkit-animation-iteration-count: infinite;
+    animation-name: AresMove;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes AresMove {
+    0%   {z-index: 2;
+        -webkit-transition: all 200ms ease-in;
+        -webkit-transform: scale(1);
+        -ms-transition: all 200ms ease-in;
+        -ms-transform: scale(1);
+        -moz-transition: all 200ms ease-in;
+        -moz-transform: scale(1);
+        transition: all 200ms ease-in;
+        transform: scale(1);}
+    50%  {z-index: 2;
+        -webkit-transition: all 200ms ease-in;
+        -webkit-transform: scale(6);
+        -ms-transition: all 200ms ease-in;
+        -ms-transform: scale(6);
+        -moz-transition: all 200ms ease-in;
+        -moz-transform: scale(6);
+        transition: all 200ms ease-in;
+        transform: scale(6);}
+    100% {z-index: 2;
+        -webkit-transition: all 200ms ease-in;
+        -webkit-transform: scale(1);
+        -ms-transition: all 200ms ease-in;
+        -ms-transform: scale(1);
+        -moz-transition: all 200ms ease-in;
+        -moz-transform: scale(1);
+        transition: all 200ms ease-in;
+        transform: scale(1);}
+}
+
+/* Standard syntax */
+@keyframes AresMove {
+    0%   {z-index: 2;
+        -webkit-transition: all 200ms ease-in;
+        -webkit-transform: scale(1);
+        -ms-transition: all 200ms ease-in;
+        -ms-transform: scale(1);
+        -moz-transition: all 200ms ease-in;
+        -moz-transform: scale(1);
+        transition: all 200ms ease-in;
+        transform: scale(1);}
+    50%  {z-index: 2;
+        -webkit-transition: all 200ms ease-in;
+        -webkit-transform: scale(1.5);
+        -ms-transition: all 200ms ease-in;
+        -ms-transform: scale(1.5);
+        -moz-transition: all 200ms ease-in;
+        -moz-transform: scale(1.5);
+        transition: all 200ms ease-in;
+        transform: scale(1.5);}
+    100% {z-index: 2;
+        -webkit-transition: all 200ms ease-in;
+        -webkit-transform: scale(1);
+        -ms-transition: all 200ms ease-in;
+        -ms-transform: scale(1);
+        -moz-transition: all 200ms ease-in;
+        -moz-transform: scale(1);
+        transition: all 200ms ease-in;
+        transform: scale(1);}
+}
